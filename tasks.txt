@@ -1,0 +1,55 @@
+NEXT
+[ ] install babel locally
+[ ] install babel-cli locally, which should install babel-node, try to run everything locally
+[ ] should be able to run babel with nodemon, which will restart the api server automatically
+    [ ] see if debug will work
+[ ] setup ES6 as a separate task, not worthed to get it running with nodemon
+[ ] setup api first, with test api, then deploy to heroku
+
+
+Tasks
+[] Make sure you are running the LTS version of Node.js (as of October 2016 the LTS version was v4.6.0)
+
+[] Create package.json
+    $ npm init
+
+[] Install babel-node
+    $ npm install babel-cli --save
+
+[] Setup babel presets.
+    es2015 preset is for syntax transformation.
+    react preset is for react and jsx.
+    polyfill is to allow es2016+ like Set, Maps, Promises
+    $ npm install babel-preset-es2015 --save
+    $ npm install babel-preset-react --save
+    $ npm install babel-polyfill --save
+
+[] Enable babel presets, create .babelrc file and add presets:
+    {
+      "presets": ["es2015", "react"]
+    }
+
+[] Add /node_modules and /dist to .gitignore
+
+Let's test the babel setup.
+
+[] create src/test.js with code:
+    let list = [1,2,3];
+
+    for (let number of list) {
+    	console.log(number);
+    }
+
+    console.log(...list);
+
+[] setup babel in package.json:
+    "scripts": {
+        "build": "babel src -d dist"
+      }
+
+[] build it:
+    $ npm run build
+
+[] test it
+    $ node dist/test.js
+    $ node src/test.js
