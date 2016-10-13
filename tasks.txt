@@ -144,9 +144,18 @@ https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction
         "npm": "2.15.9"
     }
 
-[] git commit
-[] deploy to heroku
+[] git commit and merge to master branch
+
+[] deploy to heroku from master branch
     $ git push heroku master
+
+[] launch app in heroku, it should fail
+    $ heroku open
+
+[] check logs
+    $ heroku logs --tail
+
+[] use process.env.PORT and get rid of hostname
 
 
 
