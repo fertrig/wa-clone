@@ -1,22 +1,14 @@
-NEXT
-[ ] install babel locally
-[ ] install babel-cli locally, which should install babel-node, try to run everything locally
-[ ] should be able to run babel with nodemon, which will restart the api server automatically
-    [ ] see if debug will work
-[ ] setup ES6 as a separate task, not worthed to get it running with nodemon
-[ ] setup api first, with test api, then deploy to heroku
-
-
 Tasks
+
 [] Make sure you are running the LTS version of Node.js (as of October 2016 the LTS version was v4.6.0)
 
-[] Create package.json
+[] Create package.json:
     $ npm init
 
-[] Install babel-node
+[] Install babel-node:
     $ npm install babel-cli --save
 
-[] Setup babel presets.
+[] Setup babel presets:
     es2015 preset is for syntax transformation.
     react preset is for react and jsx.
     polyfill is to allow es2016+ like Set, Maps, Promises
@@ -31,9 +23,10 @@ Tasks
 
 [] Add /node_modules and /dist to .gitignore
 
+
 Let's test the babel setup.
 
-[] create src/test.js with code:
+[] Create src/test.js with code:
     let list = [1,2,3];
 
     for (let number of list) {
@@ -42,14 +35,92 @@ Let's test the babel setup.
 
     console.log(...list);
 
-[] setup babel in package.json:
+[] Setup babel in package.json:
     "scripts": {
         "build": "babel src -d dist"
       }
 
-[] build it:
+[] Build it:
     $ npm run build
 
-[] test it
+[] Test it:
     $ node dist/test.js
     $ node src/test.js
+
+
+Simple test server:
+
+[] Create simple test server in src/test-server.js
+    const http = require('http');
+
+    const hostname = '127.0.0.1';
+    const port = 3000;
+
+    const server = http.createServer((req, res) => {
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'text/plain');
+      res.end('Hello World\n');
+    });
+
+    server.listen(port, hostname, () => {
+      console.log(`Server running at http://${hostname}:${port}/`);
+    });
+
+[] Test test-server.js by using your browser.
+
+
+Setup babel-node to avoid having to run build all the time:
+
+[] Add "babel-node" to package.json:
+    "scripts": {
+        "babel-node": "babel-node --presets=es2015"
+    }
+
+[] Test it:
+    $ npm run babel-node src/test-server.js
+
+
+Setup nodemon. It monitors file changes and automatically reloads server
+[] Install it locally:
+    $ npm install nodemon --save-dev
+
+[] In package.json:
+    "scripts": {
+        "nodemon": "nodemon --exec babel-node --presets=es2015"
+    }
+
+[] Test it:
+    $ npm run nodemon src/test-server.js
+
+[] Make a change to test-server.js and see how it restarts, then hit server with your browser.
+
+Setup ESLint, a code quality tool, checks Javascript syntax.
+http://eslint.org/docs/rules/
+
+[] Install it and configure it
+    $ npm install eslint --save-dev
+    $ ./node_modules/.bin/eslint --init
+
+    ? How would you like to configure ESLint? Answer questions about your style
+    ? Are you using ECMAScript 6 features? Yes
+    ? Are you using ES6 modules? Yes
+    ? Where will your code run? Browser, Node
+    ? Do you use CommonJS? No
+    ? Do you use JSX? Yes
+    ? Do you use React Yes
+    ? What style of indentation do you use? Tabs
+    ? What quotes do you use for strings? Single
+    ? What line endings do you use? Unix
+    ? Do you require semicolons? Yes
+    ? What format do you want your config file to be in? JSON
+
+[] Test it:
+    $ ./node_modules/.bin/eslint src/*
+
+[] git commit changes
+
+
+Deploy to Heroku
+https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction
+
+
