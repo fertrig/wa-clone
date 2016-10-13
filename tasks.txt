@@ -97,7 +97,7 @@ Setup nodemon. It monitors file changes and automatically reloads server
 Setup ESLint, a code quality tool, checks Javascript syntax.
 http://eslint.org/docs/rules/
 
-[] Install it and configure it
+[] Install it and configure it:
     $ npm install eslint --save-dev
     $ ./node_modules/.bin/eslint --init
 
@@ -122,5 +122,31 @@ http://eslint.org/docs/rules/
 
 Deploy to Heroku
 https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction
+
+[] Install toolbelt.
+
+[] Login and create heroku app:
+
+    $ heroku login
+    $ heroku create
+
+[] In package.json:
+    "scripts": {
+        "postinstall": "npm run build"
+    }
+
+[] In Procfile:
+    web: node dist/test-server.js
+
+[] In package.json:
+    "engines": {
+        "node": "4.6.0",
+        "npm": "2.15.9"
+    }
+
+[] git commit
+[] deploy to heroku
+    $ git push heroku master
+
 
 

@@ -3,11 +3,16 @@
   "version": "1.0.0",
   "description": "Repo for project-based class.",
   "main": "index.js",
+  "engines": {
+    "node": "4.6.0",
+    "npm": "2.15.9"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel src -d dist",
     "babel-node": "babel-node --presets=es2015",
-    "nodemon": "nodemon --exec babel-node --presets=es2015"
+    "nodemon": "nodemon --exec babel-node --presets=es2015",
+    "postinstall": "npm run build"
   },
   "author": "fernando@argusq.com",
   "license": "ISC",
