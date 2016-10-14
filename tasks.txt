@@ -1,161 +1,193 @@
-Tasks
+Setup
 
-[] Make sure you are running the LTS version of Node.js (as of October 2016 the LTS version was v4.6.0)
+    [] Make sure you are running the LTS version of Node.js (as of October 2016 the LTS version was v4.6.0)
 
-[] Create package.json:
-    $ npm init
+    [] Create package.json:
+        $ npm init
 
-[] Install babel-node:
-    $ npm install babel-cli --save
-
-[] Setup babel presets:
-    es2015 preset is for syntax transformation.
-    react preset is for react and jsx.
-    polyfill is to allow es2016+ like Set, Maps, Promises
-    $ npm install babel-preset-es2015 --save
-    $ npm install babel-preset-react --save
-    $ npm install babel-polyfill --save
-
-[] Enable babel presets, create .babelrc file and add presets:
-    {
-      "presets": ["es2015", "react"]
-    }
-
-[] Add /node_modules and /dist to .gitignore
+    [] Add /node_modules and /dist to .gitignore
 
 
-Let's test the babel setup.
+Install babel
+Babel transpiles Javascript ES5 to ES6.
 
-[] Create src/test.js with code:
-    let list = [1,2,3];
+    [] Install babel-node:
+        $ npm install babel-cli --save
 
-    for (let number of list) {
-    	console.log(number);
-    }
+    [] Setup babel presets:
+        es2015 preset is for syntax transformation.
+        react preset is for react and jsx.
+        polyfill is to allow es2016+ like Set, Maps, Promises
+        $ npm install babel-preset-es2015 --save
+        $ npm install babel-preset-react --save
+        $ npm install babel-polyfill --save
 
-    console.log(...list);
-
-[] Setup babel in package.json:
-    "scripts": {
-        "build": "babel src -d dist"
-      }
-
-[] Build it:
-    $ npm run build
-
-[] Test it:
-    $ node dist/test.js
-    $ node src/test.js
+    [] Enable babel presets, create .babelrc file and add presets:
+        {
+          "presets": ["es2015", "react"]
+        }
 
 
-Simple test server:
+Let's test the babel setup
 
-[] Create simple test server in src/test-server.js
-    const http = require('http');
+    [] Create src/test.js with code:
+        let list = [1,2,3];
 
-    const hostname = '127.0.0.1';
-    const port = 3000;
+        for (let number of list) {
+            console.log(number);
+        }
 
-    const server = http.createServer((req, res) => {
-      res.statusCode = 200;
-      res.setHeader('Content-Type', 'text/plain');
-      res.end('Hello World\n');
-    });
+        console.log(...list);
 
-    server.listen(port, hostname, () => {
-      console.log(`Server running at http://${hostname}:${port}/`);
-    });
+    [] Setup babel in package.json:
+        "scripts": {
+            "build": "babel src -d dist"
+          }
 
-[] Test test-server.js by using your browser.
+    [] Build it:
+        $ npm run build
 
-
-Setup babel-node to avoid having to run build all the time:
-
-[] Add "babel-node" to package.json:
-    "scripts": {
-        "babel-node": "babel-node --presets=es2015"
-    }
-
-[] Test it:
-    $ npm run babel-node src/test-server.js
+    [] Test it:
+        $ node dist/test.js
+        $ node src/test.js
 
 
-Setup nodemon. It monitors file changes and automatically reloads server
-[] Install it locally:
-    $ npm install nodemon --save-dev
+Create simple test server
 
-[] In package.json:
-    "scripts": {
-        "nodemon": "nodemon --exec babel-node --presets=es2015"
-    }
+    [] Create simple test server in src/test-server.js
+        import http from 'http';
 
-[] Test it:
-    $ npm run nodemon src/test-server.js
+        const port = process.env.PORT || 3000;
 
-[] Make a change to test-server.js and see how it restarts, then hit server with your browser.
+        const server = http.createServer((req, res) => {
+        	res.statusCode = 200;
+        	res.setHeader('Content-Type', 'text/plain');
+        	res.end('Hello World - \n');
+        });
 
-Setup ESLint, a code quality tool, checks Javascript syntax.
+        server.listen(port, () => {
+        	console.log(`Server running at port ${port}.`);
+        });
+
+    [] Test test-server.js by using your browser.
+
+
+Setup babel-node
+To avoid having to run build all the time.
+
+    [] Add "babel-node" to package.json:
+        "scripts": {
+            "babel-node": "babel-node --presets=es2015"
+        }
+
+    [] Test it:
+        $ npm run babel-node src/test-server.js
+
+
+Setup nodemon
+It monitors file changes and automatically reloads server.
+    [] Install it locally:
+        $ npm install nodemon --save-dev
+
+    [] In package.json:
+        "scripts": {
+            "nodemon": "nodemon --exec babel-node --presets=es2015"
+        }
+
+    [] Test it:
+        $ npm run nodemon src/test-server.js
+
+    [] Make a change to test-server.js and see how it restarts, then hit server with your browser.
+
+Setup ESLint
+A code quality tool, checks Javascript syntax.
 http://eslint.org/docs/rules/
 
-[] Install it and configure it:
-    $ npm install eslint --save-dev
-    $ ./node_modules/.bin/eslint --init
+    [] Install it and configure it:
+        $ npm install eslint --save-dev
+        $ ./node_modules/.bin/eslint --init
 
-    ? How would you like to configure ESLint? Answer questions about your style
-    ? Are you using ECMAScript 6 features? Yes
-    ? Are you using ES6 modules? Yes
-    ? Where will your code run? Browser, Node
-    ? Do you use CommonJS? No
-    ? Do you use JSX? Yes
-    ? Do you use React Yes
-    ? What style of indentation do you use? Tabs
-    ? What quotes do you use for strings? Single
-    ? What line endings do you use? Unix
-    ? Do you require semicolons? Yes
-    ? What format do you want your config file to be in? JSON
+        ? How would you like to configure ESLint? Answer questions about your style
+        ? Are you using ECMAScript 6 features? Yes
+        ? Are you using ES6 modules? Yes
+        ? Where will your code run? Browser, Node
+        ? Do you use CommonJS? No
+        ? Do you use JSX? Yes
+        ? Do you use React Yes
+        ? What style of indentation do you use? Tabs
+        ? What quotes do you use for strings? Single
+        ? What line endings do you use? Unix
+        ? Do you require semicolons? Yes
+        ? What format do you want your config file to be in? JSON
 
-[] Test it:
-    $ ./node_modules/.bin/eslint src/*
+    [] Test it:
+        $ ./node_modules/.bin/eslint src/*
 
-[] git commit changes
+    [] git commit changes
 
 
 Deploy to Heroku
 https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction
 
-[] Install toolbelt.
+    [] Install toolbelt.
 
-[] Login and create heroku app:
+    [] Login and create heroku app:
 
-    $ heroku login
-    $ heroku create
+        $ heroku login
+        $ heroku create
 
-[] In package.json:
-    "scripts": {
-        "postinstall": "npm run build"
-    }
+    [] In package.json:
+        "scripts": {
+            "postinstall": "npm run build"
+        }
 
-[] In Procfile:
-    web: node dist/test-server.js
+    [] In Procfile:
+        web: node dist/test-server.js
 
-[] In package.json:
-    "engines": {
-        "node": "4.6.0",
-        "npm": "2.15.9"
-    }
+    [] In package.json:
+        "engines": {
+            "node": "4.6.0",
+            "npm": "2.15.9"
+        }
 
-[] git commit and merge to master branch
+    [] git commit and merge to master branch
 
-[] deploy to heroku from master branch
-    $ git push heroku master
+    [] Deploy to heroku from master branch.
+        $ git push heroku master
 
-[] launch app in heroku, it should fail
-    $ heroku open
+    [] Launch app in heroku, it should fail.
+        $ heroku open
 
-[] check logs
-    $ heroku logs --tail
+    [] Check logs:
+        $ heroku logs --tail
 
-[] use process.env.PORT and get rid of hostname
+    [] Checkout branch sln/00-api-server, then fix test-server.js, use process.env.PORT and get rid of hostname.
+
+    [] Deploy to heroku from master branch. Launch app and verify server is working as expected.
+
+
+Setup express.js
+Popular web server for node.js
+
+    [] $ npm install express --save
+
+    [] Create api-server.js with sample code below:
+
+        import express from 'express';
+
+        const app = express();
+
+        const port = process.env.PORT || 3000;
+
+        app.get('/', (req, res) => {
+            res.send('Hello World!');
+        });
+
+        app.listen(port, () => {
+            console.log('Express app listening on port 3000');
+        });
+
+    [] Test it with nodemon and your browser
 
 
 
