@@ -150,10 +150,11 @@ https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction
             "npm": "2.15.9"
         }
 
-    [] git commit and merge to master branch
+    [] create release branch
+    [] git commit and merge to release branch
 
-    [] Deploy to heroku from master branch.
-        $ git push heroku master
+    [] Deploy to heroku from release branch.
+        $ git push heroku release:master
 
     [] Launch app in heroku, it should fail.
         $ heroku open
@@ -163,7 +164,7 @@ https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction
 
     [] Checkout branch sln/00-api-server, then fix test-server.js, use process.env.PORT and get rid of hostname.
 
-    [] Deploy to heroku from master branch. Launch app and verify server is working as expected.
+    [] Deploy to heroku from release branch. Launch app and verify server is working as expected.
 
 
 Setup express.js
@@ -188,8 +189,6 @@ Popular web server for node.js
         });
 
     [] Test it with nodemon and your browser
-
-
 
 
 Setup Redis
