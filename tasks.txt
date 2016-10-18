@@ -193,11 +193,19 @@ Popular web server for node.js
 
 Setup Redis
 
-    [] $ heroku addons:create rediscloud:30
+    [] make sure your local redis server is running
+        http://redis.io/download
     [] $ npm install redis --save
     [] create redis-client.js that exposes a setupRedis function and the redisClient
     [] call setupRedis from api-server.js
     [] add /redis-test route that increments a 'inc-test' key in redis and returns the new incremented value
+
+    [] in heroku: add redis as an add-on
+        $ heroku addons:create rediscloud:30
+    [] deploy to heroku and test redis route
+
+
+
 
 
 Setup .env
