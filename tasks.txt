@@ -191,3 +191,24 @@ Popular web server for node.js
 
 
 
+
+Setup Redis
+
+    [] $ heroku addons:create rediscloud:30
+    [] $ npm install redis --save
+    [] create redis-client.js that exposes a setupRedis function and the redisClient
+    [] call setupRedis from api-server.js
+    [] add /redis-test route that increments a 'inc-test' key in redis and returns the new incremented value
+
+
+Setup .env
+    [] $ npm install dotenv --save
+    [] create .env file in root
+    [] in api-server.js
+
+        if (!process.env.PORT) {
+        	require('dotenv').load();
+        	console.log('.env loaded manually, port', process.env.PORT);
+        }
+
+    [] .gitignore .env file
