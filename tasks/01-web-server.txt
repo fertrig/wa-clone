@@ -1,6 +1,27 @@
-[] Organize js files into spa, core and api directories.
+Organize directories
+    [] Organize js files into spa, core and api directories.
+    [] Build js files using $ npm run build-api
+    [] need to clean up dist contents first
+        "build-api": "rm -R dist/api & babel src/api -d dist/api",
+        "postinstall": "npm run build-api"
 
-[] Build js files using $ npm run build
-    [] need to delete dist contents first
-        "build": "rm -R dist & babel src -d dist"
+React and React-DOM
+    [] Install react and react-dom. Since we are going to build spa locally, install them into devDependencies:
+        $ npm install react --save-dev
+        $ npm install react-dom --save-dev
+
+Entry point of our spa
+    [] Create src/spa/app.js, this will be the entry point of our spa.
+    [] Make sure to import babel-polyfill at the top of file.
+    [] app.js will import react and react-dom and will render a simple message for now.
+
+Setup webpack
+    [] Install webpack, webpack-dev-server and babel-loader as devDependencies
+    [] Add webpack.config.js file (see sln branch)
+    [] Install gulp to help us run more complex tasks (like webpack dev server and build)
+    [] Add gulpfile.js (see sln branch)
+    [] Add www/index.html (see sln branch)
+    [] Add npm scripts and test them:
+        "build-spa": "rm -R dist/spa & gulp build-spa",
+        "spa-server": "gulp spa-server",
 

@@ -9,10 +9,12 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm -R dist & babel src -d dist",
+    "build-api": "rm -R dist/api & babel src/api -d dist/api",
     "babel-node": "babel-node --presets=es2015",
     "nodemon": "nodemon --exec babel-node --presets=es2015",
-    "postinstall": "npm run build"
+    "build-spa": "rm -R dist/spa & gulp build-spa",
+    "spa-server": "gulp spa-server",
+    "postinstall": "npm run build-api"
   },
   "author": "fernando@argusq.com",
   "license": "ISC",
@@ -26,11 +28,18 @@
     "redis": "^2.6.2"
   },
   "devDependencies": {
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
     "eslint": "^3.7.1",
     "eslint-config-standard": "^6.2.0",
     "eslint-plugin-promise": "^3.0.0",
     "eslint-plugin-react": "^6.4.1",
     "eslint-plugin-standard": "^2.0.1",
-    "nodemon": "^1.11.0"
+    "gulp": "^3.9.1",
+    "nodemon": "^1.11.0",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.2"
   }
 }
