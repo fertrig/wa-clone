@@ -25,8 +25,8 @@ Setup webpack
         "build-spa": "rm -R dist/spa & gulp build-spa",
         "spa-server": "gulp spa-server",
 
-Setup json test api so the spa and api can interact
+Integrate spa and api using a json route
     [] In the api, add /test-json route. It should also increment using Redis and it should return an object using res.json({}).
     [] In the spa, npm install jquery to make ajax calls.
-    [] Create react component, that will make an ajax call to the /test-json route and will render result.
+    [] Create a react component that will make an ajax call to the /test-json route and will render result.
 
