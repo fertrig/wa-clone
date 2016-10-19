@@ -1,5 +1,8 @@
 Setup
 
+    [] checkout dev branch from master
+        $ git checkout -b dev
+
     [] Make sure you are running the LTS version of Node.js (as of October 2016 the LTS version was v4.6.0)
 
     [] Create package.json:
