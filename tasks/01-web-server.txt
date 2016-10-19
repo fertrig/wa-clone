@@ -1,0 +1,6 @@
+[] Organize js files into spa, core and api directories.
+
+[] Build js files using $ npm run build
+    [] need to delete dist contents first
+        "build": "rm -R dist & babel src -d dist"
+
