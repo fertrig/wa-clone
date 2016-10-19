@@ -2,8 +2,9 @@ import 'babel-polyfill';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Increment from './increment.react';
 
 ReactDOM.render(
-	<p>Hello World --the spa</p>,
+	<Increment />,
 	document.getElementById('root')
 );
