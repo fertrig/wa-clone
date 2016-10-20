@@ -4,6 +4,7 @@ Organize directories
     [] need to clean up dist contents first
         "build-api": "rm -R dist/api & babel src/api -d dist/api",
         "postinstall": "npm run build-api"
+    [] update Procfile
 
 React and React-DOM
     [] Install react and react-dom. Since we are going to build spa locally, install them into devDependencies:
