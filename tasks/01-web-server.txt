@@ -31,3 +31,16 @@ Integrate spa and api using a json route
     [] In the spa, npm install jquery to make ajax calls.
     [] Create a react component that will make an ajax call to the /test-json route and will render result.
 
+Setup static site
+We need a simple site that will host our index.html and static assets (bundle.js, images, etc.).
+We can use github pages for that.
+    [] Fork my wa-clone-site repo: https://github.com/fertrig/wa-clone-site
+    [] On your fork: click on the Settings tab and scroll down to the GitHub Pages section. Then select the master branch source and click on the Save button.
+        https://pages.github.com/
+    [] Delete the spa/ directory contents
+    [] Update index.html with your apiUrl
+    [] Build the spa in the main repo, then copy the bundle.js and bundle.js.map over to the site repo
+    [] Commit and push to the site repo.
+    [] Deploy your api to heroku
+    [] Go to your github site to verify spa is using the api hosted in heroku:
+        https://[username].github.io/wa-clone-site/
