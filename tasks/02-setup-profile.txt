@@ -1,0 +1,20 @@
+API to create user
+Create an api route that will create a user in Redis.
+    [x] Route will accept a json object ($ npm install body-parser --save)
+    [x] A user has a handle and name.
+    [x] Validation rules:
+        [x] handle must be unique,
+        [x] handle cannot be more than 16 characters
+    [x] Validation rules will run on the server and the client, thus make sure the code runs on both the client and server (i.e. universal javascript)
+    [x] create unit tests for validation
+        $ npm install gulp-mocha --save-dev
+        $ npm install chai --save-dev
+        [x] setup gulp task (see sln branch)
+    [] If validation fails, return error.
+    [] If validation succeeds, save to Redis and return a JWT token to the client.
+    [] Store the user in an array of users in Redis.
+    [] The token will encode the user's handle. API signs the user handle using a key, that way only the api can decode it. Note that the token doesn't expire, which is not ideal. For a proper JWT implementation see:
+    https://auth0.com/blog/refresh-tokens-what-are-they-and-when-to-use-them/
+    https://jwt.io/introduction/
+
+    [] spa will store jwt token in local storage so that it can be used for subsequent requests

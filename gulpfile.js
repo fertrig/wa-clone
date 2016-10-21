@@ -1,6 +1,6 @@
 'use strict';
 
-//require('babel-core/register');
+require('babel-core/register');
 
 var gulp = require('gulp');
 
@@ -52,4 +52,18 @@ gulp.task('spa-server', function() {
 			console.error(err);
 		}
 	})
+});
+
+
+var mocha = require('gulp-mocha');
+var testPaths = ['./test-root.js','./src/**/__tests__/*.tests.js'];
+
+gulp.task('test', function () {
+	return gulp
+		.src(testPaths, {
+			read: false
+		})
+		.pipe(mocha({
+			reporter: 'nyan'
+		}));
 });
