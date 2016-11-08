@@ -1,0 +1,25 @@
+{
+  "name": "wa-clone",
+  "version": "1.0.0",
+  "description": "Repo for project-based class.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "nodemon": "nodemon --exec node"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fertrig/wa-clone.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fertrig/wa-clone/issues"
+  },
+  "homepage": "https://github.com/fertrig/wa-clone",
+  "devDependencies": {
+    "eslint": "^3.9.1",
+    "eslint-plugin-react": "^6.6.0",
+    "nodemon": "^1.11.0"
+  }
+}
