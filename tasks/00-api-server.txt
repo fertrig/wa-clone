@@ -162,7 +162,7 @@ https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction
     [] Check logs:
         $ heroku logs --tail
 
-    [] Checkout branch sln/00-api-server, then fix test-server.js, use process.env.PORT and get rid of hostname.
+    [] See branch sln/00-api-server, then fix test-server.js, use process.env.PORT and get rid of hostname.
 
     [] Deploy to heroku from release branch. Launch app and verify server is working as expected.
 
