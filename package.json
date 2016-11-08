@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Repo for project-based class.",
   "main": "index.js",
+  "engines": {
+    "node": "6.9.1",
+    "npm": "3.10.8"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "nodemon": "nodemon --exec node"

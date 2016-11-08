@@ -1,8 +1,5 @@
 Setup
 
-    [] checkout dev branch from master
-        $ git checkout -b dev
-
     [] Make sure you are running the LTS version of Node.js (as of October 2016 the LTS version was v4.6.0)
 
     [] Create package.json:
@@ -153,10 +150,11 @@ https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction
             "npm": "2.15.9"
         }
 
-    [] git commit and merge to master branch
+    [] create release branch
+    [] git commit and merge to release branch
 
-    [] Deploy to heroku from master branch.
-        $ git push heroku master
+    [] Deploy to heroku from release branch.
+        $ git push heroku release:master
 
     [] Launch app in heroku, it should fail.
         $ heroku open
@@ -166,7 +164,7 @@ https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction
 
     [] Checkout branch sln/00-api-server, then fix test-server.js, use process.env.PORT and get rid of hostname.
 
-    [] Deploy to heroku from master branch. Launch app and verify server is working as expected.
+    [] Deploy to heroku from release branch. Launch app and verify server is working as expected.
 
 
 Setup express.js
@@ -193,4 +191,15 @@ Popular web server for node.js
     [] Test it with nodemon and your browser
 
 
+Setup Redis
 
+    [] make sure your local redis server is running
+        http://redis.io/download
+    [] $ npm install redis --save
+    [] create redis-client.js that exposes a setupRedis function and the redisClient
+    [] call setupRedis from api-server.js
+    [] add /redis-test route that increments a 'inc-test' key in redis and returns the new incremented value
+
+    [] in heroku: add redis as an add-on
+        $ heroku addons:create rediscloud:30
+    [] deploy to heroku and test redis route
