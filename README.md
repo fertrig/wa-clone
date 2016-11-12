@@ -1,3 +1,3 @@
-Repo for project-based class.
+DO NOT USE THIS BRANCH.
 
-The repo has branches for exercises and solutions.
+Use instead sln/00-api-server-v2
