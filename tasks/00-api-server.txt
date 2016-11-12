@@ -3,7 +3,7 @@ Setup
     [] checkout dev branch from master
         $ git checkout -b dev
 
-    [] Make sure you are running the LTS version of Node.js (as of October 2016 the LTS version was v4.6.0)
+    [] Make sure you are running the LTS version of Node.js (as of November 2016 the LTS version was v6.9.1)
 
     [] Create package.json:
         $ npm init
