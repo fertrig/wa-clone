@@ -9,10 +9,10 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm -R dist & babel --plugins transform-es2015-modules-commonjs src -d dist",
+    "build-api": "rm -R dist/api & babel --plugins transform-es2015-modules-commonjs src/api -d dist/api",
     "babel-node": "babel-node --plugins transform-es2015-modules-commonjs",
     "nodemon": "nodemon --exec npm run babel-node",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build-api"
   },
   "repository": {
     "type": "git",
