@@ -11,7 +11,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rm -R dist & babel --plugins transform-es2015-modules-commonjs src -d dist",
     "babel-node": "babel-node --plugins transform-es2015-modules-commonjs",
-    "nodemon": "nodemon --exec npm run babel-node"
+    "nodemon": "nodemon --exec npm run babel-node",
+    "postinstall": "npm run build"
   },
   "repository": {
     "type": "git",
