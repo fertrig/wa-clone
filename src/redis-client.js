@@ -1,4 +1,4 @@
-const redis = require('redis');
+import redis from 'redis';
 
 let client = null;
 
@@ -21,5 +21,4 @@ function setup() {
 	});
 }
 
-exports.getClient = () => client;
-exports.setupRedis = setup;
+export {setup as setupRedis, client as redisClient}
