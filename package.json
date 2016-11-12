@@ -10,7 +10,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rm -R dist & babel --plugins transform-es2015-modules-commonjs src -d dist",
-    "nodemon": "nodemon --exec node"
+    "babel-node": "babel-node --plugins transform-es2015-modules-commonjs",
+    "nodemon": "nodemon --exec npm run babel-node"
   },
   "repository": {
     "type": "git",
