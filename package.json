@@ -9,6 +9,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -R dist & babel --plugins transform-es2015-modules-commonjs src -d dist",
     "nodemon": "nodemon --exec node"
   },
   "repository": {
@@ -27,6 +28,8 @@
     "nodemon": "^1.11.0"
   },
   "dependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.18.0",
     "express": "^4.14.0",
     "redis": "^2.6.3"
   }
