@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/redis-test', (req, res) => {
-	redisClient.incr('inc-test-v2', (err, result) => {
+	redisClient.incr('inc-test', (err, result) => {
 		if (err) {
 			console.error(err);
 			res.send('Error connecting to redis');
