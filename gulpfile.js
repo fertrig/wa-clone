@@ -53,3 +53,16 @@ gulp.task('spa-server', () => {
 		}
 	})
 });
+
+const mocha = require('gulp-mocha');
+const testPaths = ['./test-root.js','./src/**/__tests__/*.tests.js'];
+
+gulp.task('test', () => {
+	return gulp
+		.src(testPaths, {
+			read: false
+		})
+		.pipe(mocha({
+			reporter: 'nyan'
+		}));
+});
