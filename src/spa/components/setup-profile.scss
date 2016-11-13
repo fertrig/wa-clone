@@ -1,0 +1,28 @@
+.setup-profile {
+
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  .profile-editor {
+    position: absolute;
+    top: 217px;
+    left: 20px;
+  }
+
+  .submit {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 50px;
+    width: 100%;
+    background-image: linear-gradient(to left, #56da96, #47cab4);
+    border-radius: 0 0 3px 3px;
+
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 50px;
+    font-size: 16px;
+    color: #ffffff;
+  }
+}
