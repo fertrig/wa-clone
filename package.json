@@ -26,18 +26,17 @@
     "url": "https://github.com/fertrig/wa-clone/issues"
   },
   "homepage": "https://github.com/fertrig/wa-clone",
-
   "dependencies": {
     "babel-cli": "^6.18.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.18.0",
     "body-parser": "^1.15.2",
     "cors": "^2.8.1",
     "express": "^4.14.0",
+    "jsonwebtoken": "^7.1.9",
     "redis": "^2.6.3",
     "url-join": "^1.1.0",
     "validator": "^6.1.0"
   },
-
   "devDependencies": {
     "babel-loader": "^6.2.7",
     "babel-polyfill": "^6.16.0",
