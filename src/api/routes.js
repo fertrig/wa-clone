@@ -32,11 +32,30 @@ function setup(app) {
 	app.post('/user', (req, res, next) => {
 		console.log('user', req.body);
 
+		const {handle, name} = req.body;
+
+		const user = {
+			handle,
+			name
+		};
+
 		const validator = new UserValidator(req.body);
 
 		const errors = validator.validate([]);
 
-		res.json(errors);
+		if (errors.length > 0) {
+			res.status(400).send(errors.join(','));
+		}
+		else {
+			redisClient.lpush('users', JSON.stringify(user), (err, result) => {
+				if (err) {
+					next(err);
+				}
+				else {
+					res.send(`User saved to redis. Number of users: ${result}.`);
+				}
+			});
+		}
 	});
 }
 
