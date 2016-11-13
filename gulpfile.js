@@ -1,6 +1,6 @@
 'use strict';
 
-require('babel-core/register');
+// require('babel-core/register');
 
 const gulp = require('gulp');
 
@@ -52,17 +52,4 @@ gulp.task('spa-server', () => {
 			console.error(err);
 		}
 	})
-});
-
-const mocha = require('gulp-mocha');
-const testPaths = ['./test-root.js','./src/**/__tests__/*.tests.js'];
-
-gulp.task('test', () => {
-	return gulp
-		.src(testPaths, {
-			read: false
-		})
-		.pipe(mocha({
-			reporter: 'nyan'
-		}));
 });

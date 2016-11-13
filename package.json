@@ -8,13 +8,13 @@
     "npm": "3.10.8"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build-api": "rm -R dist/api & babel --plugins transform-es2015-modules-commonjs src/api -d dist/api",
-    "babel-node": "babel-node --plugins transform-es2015-modules-commonjs",
+    "build-api": "rm -R dist/api && rm -R dist/core && babel src/api -d dist/api && babel src/core -d dist/core",
+    "babel-node": "babel-node",
     "nodemon": "nodemon --exec npm run babel-node",
     "postinstall": "npm run build-api",
     "build-spa": "rm -R dist/spa & gulp build-spa",
-    "spa-server": "gulp spa-server"
+    "spa-server": "gulp spa-server",
+    "test": "mocha './test-root.js' './src/**/__tests__/*.tests.js' --compilers js:babel-core/register"
   },
   "repository": {
     "type": "git",
@@ -26,23 +26,7 @@
     "url": "https://github.com/fertrig/wa-clone/issues"
   },
   "homepage": "https://github.com/fertrig/wa-clone",
-  "devDependencies": {
-    "babel-loader": "^6.2.7",
-    "babel-polyfill": "^6.16.0",
-    "babel-preset-es2015": "^6.18.0",
-    "babel-preset-react": "^6.16.0",
-    "chat": "^0.6.0",
-    "eslint": "^3.9.1",
-    "eslint-plugin-react": "^6.6.0",
-    "gulp": "^3.9.1",
-    "gulp-mocha": "^3.0.1",
-    "jquery": "^3.1.1",
-    "nodemon": "^1.11.0",
-    "react": "^15.3.2",
-    "react-dom": "^15.3.2",
-    "webpack": "^1.13.3",
-    "webpack-dev-server": "^1.16.2"
-  },
+
   "dependencies": {
     "babel-cli": "^6.18.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.18.0",
@@ -52,5 +36,23 @@
     "redis": "^2.6.3",
     "url-join": "^1.1.0",
     "validator": "^6.1.0"
+  },
+
+  "devDependencies": {
+    "babel-loader": "^6.2.7",
+    "babel-polyfill": "^6.16.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "chai": "^3.5.0",
+    "eslint": "^3.9.1",
+    "eslint-plugin-react": "^6.6.0",
+    "gulp": "^3.9.1",
+    "jquery": "^3.1.1",
+    "mocha": "^3.1.2",
+    "nodemon": "^1.11.0",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "webpack": "^1.13.3",
+    "webpack-dev-server": "^1.16.2"
   }
 }

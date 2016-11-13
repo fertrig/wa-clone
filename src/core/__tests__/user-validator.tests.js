@@ -1,4 +1,4 @@
-import UserValidator from '../user-validator';
+import {UserValidator} from '../user-validator';
 
 describe('UserValidator Tests', () => {
 
