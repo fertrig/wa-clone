@@ -21,4 +21,4 @@ function setup() {
 	});
 }
 
-export {setup as setupRedis, client as redisClient}
+export {setup as setupRedis, client as redisClient};

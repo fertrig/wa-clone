@@ -9,10 +9,11 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm -R dist & babel --plugins transform-es2015-modules-commonjs src -d dist",
-    "babel-node": "babel-node --plugins transform-es2015-modules-commonjs",
+    "build": "rm -R dist & babel src -d dist",
+    "babel-node": "babel-node",
     "nodemon": "nodemon --exec npm run babel-node",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "lint": "eslint src/*"
   },
   "repository": {
     "type": "git",
@@ -24,15 +25,17 @@
     "url": "https://github.com/fertrig/wa-clone/issues"
   },
   "homepage": "https://github.com/fertrig/wa-clone",
-  "devDependencies": {
-    "eslint": "^3.9.1",
-    "eslint-plugin-react": "^6.6.0",
-    "nodemon": "^1.11.0"
-  },
+
   "dependencies": {
     "babel-cli": "^6.18.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.18.0",
     "express": "^4.14.0",
     "redis": "^2.6.3"
+  },
+
+  "devDependencies": {
+    "eslint": "^3.9.1",
+    "eslint-plugin-react": "^6.6.0",
+    "nodemon": "^1.11.0"
   }
 }
