@@ -65,7 +65,7 @@ function setup(app) {
 							const token = jwt.sign({ handle }, handleSecret);
 
 							res.json({
-								token
+								token: `Bearer ${token}`
 							});
 
 							//res.send(`User saved to redis. Number of users: ${result}.`);

@@ -34,6 +34,7 @@
     "css-loader": "^0.25.0",
     "express": "^4.14.0",
     "jsonwebtoken": "^7.1.9",
+    "key-mirror": "^1.0.1",
     "node-sass": "^3.11.3",
     "redis": "^2.6.3",
     "sass-loader": "^4.0.2",
