@@ -4,6 +4,7 @@ import SubmitButton from './submit-button.react';
 import $ from 'jquery';
 import urlJoin from 'url-join';
 import {requestStates} from '../../core/request-states';
+import {DefaultActions} from '../flux/default-actions';
 
 class SetupProfile extends React.Component {
     constructor(props) {
@@ -97,6 +98,10 @@ class SetupProfile extends React.Component {
                 this.setState({
                     requestState: requestStates.success
                 });
+
+                global.setTimeout(() => {
+                    DefaultActions.changeView();
+                }, 500);
             },
             error: () => {
                 console.log(...arguments);
