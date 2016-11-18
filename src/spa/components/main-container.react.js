@@ -1,6 +1,8 @@
 import React from 'react';
-import SetupProfile from './setup-profile.react';
-import {defaultStore} from '../flux/default-store';
+import SetupProfile from './profile/setup-profile.react';
+import {defaultStore} from '../flux/default/default-store';
+import {mainViews} from '../flux/default/main-views';
+import Chats from './chat/chats.react';
 
 class MainContainer extends React.Component {
     constructor(props) {
@@ -11,7 +13,7 @@ class MainContainer extends React.Component {
 
     _getState() {
         return  {
-            activeView: defaultStore.activeView
+            mainView: defaultStore.mainView
         };
     }
 
@@ -25,12 +27,15 @@ class MainContainer extends React.Component {
     }
 
     _renderActiveView() {
-        switch (this.state.activeView) {
-            case 'setup-profile':
+        switch (this.state.mainView) {
+            case mainViews.setupProfile:
                 return <SetupProfile/>;
 
+            case mainViews.chats:
+                return <Chats />;
+
             default:
-                return <p>Some other view</p>;
+                throw new Error(`unexpected main view ${this.state.mainView}`)
         }
     }
 

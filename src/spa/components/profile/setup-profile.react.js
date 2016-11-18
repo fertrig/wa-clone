@@ -3,8 +3,9 @@ import ProfileEditor from './profile-editor.react';
 import SubmitButton from './submit-button.react';
 import $ from 'jquery';
 import urlJoin from 'url-join';
-import {requestStates} from '../../core/request-states';
-import {DefaultActions} from '../flux/default-actions';
+import {requestStates} from '../../../core/request-states';
+import {DefaultActions} from '../../flux/default/default-actions';
+import {mainViews} from '../../flux/default/main-views';
 
 class SetupProfile extends React.Component {
     constructor(props) {
@@ -100,7 +101,7 @@ class SetupProfile extends React.Component {
                 });
 
                 global.setTimeout(() => {
-                    DefaultActions.changeView();
+                    DefaultActions.changeMainView(mainViews.chats);
                 }, 500);
             },
             error: () => {

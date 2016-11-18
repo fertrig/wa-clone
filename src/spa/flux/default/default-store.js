@@ -1,4 +1,6 @@
-import {BaseStore} from './base-store';
+import {BaseStore} from '../base-store';
+import {defaultActionTypes} from './default-action-types';
+import {mainViews} from './main-views';
 
 class DefaultStore extends BaseStore {
 
@@ -13,11 +15,9 @@ class ActionHandler {
 
     static handleAction(action, modifier, emitChange) {
 
-        console.log('handling action', action);
-
         switch (action.type) {
-            case 'set-active-view':
-                modifier.setActiveView(action.data.view);
+            case defaultActionTypes.setMainView:
+                modifier.setMainView(action.data.mainView);
                 emitChange();
                 break;
 
@@ -34,11 +34,11 @@ class StateModifier {
     }
 
     resetState() {
-        this._state.activeView = 'setup-profile';
+        this._state.mainView = mainViews.setupProfile;
     }
 
-    setActiveView(view) {
-        this._state.activeView = view;
+    setMainView(view) {
+        this._state.mainView = view;
     }
 }
 

@@ -51,6 +51,7 @@ class BaseStore extends EventEmitter {
         if (!action.type) {
             throw new Error('action payload is missing a type');
         }
+        console.log('handling action', action);
         this._handleAction(action, this._modifier, this._emitChange.bind(this), this);
     }
 }
