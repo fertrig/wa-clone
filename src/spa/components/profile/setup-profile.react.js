@@ -1,11 +1,12 @@
 import React from 'react';
 import ProfileEditor from './profile-editor.react';
 import SubmitButton from './submit-button.react';
-import $ from 'jquery';
-import urlJoin from 'url-join';
 import {requestStates} from '../../../core/request-states';
 import {DefaultActions} from '../../flux/default/default-actions';
 import {mainViews} from '../../flux/default/main-views';
+import {standardAjaxRequest} from '../../utils/ajax-request';
+import {ApiUrls} from "../../utils/api-urls";
+import {LocalStorageKeys} from "../../utils/local-storage-keys";
 
 class SetupProfile extends React.Component {
     constructor(props) {
@@ -85,17 +86,19 @@ class SetupProfile extends React.Component {
             requestState: requestStates.fetching
         });
 
-        $.ajax({
-            url: urlJoin(global.__apiUrl__, 'user'),
-            dataType: 'json',
-            contentType: "application/json; charset=utf-8",
-            type: 'POST',
-            data: JSON.stringify({
-                handle: this.state.handle,
-                name: this.state.name
-            }),
+        const user = {
+            handle: this.state.handle,
+            name: this.state.name
+        };
+
+        standardAjaxRequest.post({
+            url: ApiUrls.user(),
+            data: user,
             success: (res) => {
-                localStorage.setItem('user-token', res.token);
+                localStorage.setItem(LocalStorageKeys.authToken, res.token);
+                localStorage.setItem(LocalStorageKeys.user, JSON.stringify(user));
+                console.log(`auth token saved to localStorage key ${LocalStorageKeys.authToken}`);
+                console.log('user', user);
                 this.setState({
                     requestState: requestStates.success
                 });

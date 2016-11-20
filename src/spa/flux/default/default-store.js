@@ -1,6 +1,7 @@
 import {BaseStore} from '../base-store';
 import {defaultActionTypes} from './default-action-types';
 import {mainViews} from './main-views';
+import {LocalStorageKeys} from "../../utils/local-storage-keys";
 
 class DefaultStore extends BaseStore {
 
@@ -34,7 +35,19 @@ class StateModifier {
     }
 
     resetState() {
-        this._state.mainView = mainViews.setupProfile;
+        const token = localStorage.getItem(LocalStorageKeys.authToken);
+        const user = localStorage.getItem(LocalStorageKeys.user);
+
+        if (token) {
+            console.log('auth token found');
+            console.log('user', user);
+
+            this._state.mainView = mainViews.chats;
+        }
+        else {
+            console.log('auth token not found');
+            this._state.mainView = mainViews.setupProfile;
+        }
     }
 
     setMainView(view) {
