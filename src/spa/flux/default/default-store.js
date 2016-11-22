@@ -22,6 +22,11 @@ class ActionHandler {
                 emitChange();
                 break;
 
+            case defaultActionTypes.showModal:
+                modifier.showModal(action.data.modal);
+                emitChange();
+                break;
+
             default:
                 break;
         }
@@ -35,6 +40,11 @@ class StateModifier {
     }
 
     resetState() {
+        this._state.mainView = this._getInitialMainView();
+        this._state.modal = null;
+    }
+
+    _getInitialMainView() {
         const token = localStorage.getItem(LocalStorageKeys.authToken);
         const user = localStorage.getItem(LocalStorageKeys.user);
 
@@ -42,16 +52,20 @@ class StateModifier {
             console.log('auth token found');
             console.log('user', user);
 
-            this._state.mainView = mainViews.chats;
+            return mainViews.chats;
         }
         else {
             console.log('auth token not found');
-            this._state.mainView = mainViews.setupProfile;
+            return mainViews.setupProfile;
         }
     }
 
     setMainView(view) {
         this._state.mainView = view;
+    }
+
+    showModal(modal) {
+        this._state.modal = modal;
     }
 }
 

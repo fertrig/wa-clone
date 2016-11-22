@@ -2,7 +2,10 @@ import React from 'react';
 import SetupProfile from './profile/setup-profile.react';
 import {defaultStore} from '../flux/default/default-store';
 import {mainViews} from '../flux/default/main-views';
+import {modals} from '../flux/default/modals';
 import Chats from './chat/chats.react';
+import Modal from './modal.react';
+import AddContactEditor from './chat/add-contact-editor.react';
 
 class MainContainer extends React.Component {
     constructor(props) {
@@ -13,7 +16,8 @@ class MainContainer extends React.Component {
 
     _getState() {
         return  {
-            mainView: defaultStore.mainView
+            mainView: defaultStore.mainView,
+            modal: defaultStore.modal
         };
     }
 
@@ -22,6 +26,7 @@ class MainContainer extends React.Component {
         return (
             <div className="main-container">
                 {this._renderActiveView()}
+                {this._renderModal()}
             </div>
         );
     }
@@ -36,6 +41,25 @@ class MainContainer extends React.Component {
 
             default:
                 throw new Error(`unexpected main view ${this.state.mainView}`)
+        }
+    }
+
+    _renderModal() {
+        return (
+            <Modal
+                isOpen={this.state.modal !== null}>
+                {this._renderModalContents()}
+            </Modal>
+        );
+    }
+
+    _renderModalContents() {
+        switch (this.state.modal) {
+            case modals.addContact:
+                return <AddContactEditor />;
+
+            default:
+                return null;
         }
     }
 

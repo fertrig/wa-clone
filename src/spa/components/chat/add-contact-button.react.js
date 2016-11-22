@@ -1,11 +1,11 @@
 import React from 'react';
-import {ChatActions} from '../../flux/chat/chat-actions';
+import {DefaultActions} from '../../flux/default/default-actions';
 
 function AddContactButton () {
     return (
         <div
             className="add-contact-button"
-            onClick={ChatActions.showAddContactModal}>
+            onClick={DefaultActions.showAddContactModal}>
             <span>+</span>
         </div>
     )

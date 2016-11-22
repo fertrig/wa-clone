@@ -1,7 +1,8 @@
 import keyMirror from 'key-mirror';
 
 const defaultActionTypes = keyMirror({
-    setMainView: null
+    setMainView: null,
+    showModal: null
 });
 
 export {defaultActionTypes}
