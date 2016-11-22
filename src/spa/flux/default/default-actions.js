@@ -1,6 +1,6 @@
 import {dispatcher} from '../dispatcher';
 import {defaultActionTypes} from './default-action-types';
-import {modals} from './modals';
+import {modals} from '../../enums/modals';
 
 class DefaultActions {
 

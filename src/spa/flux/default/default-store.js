@@ -1,6 +1,6 @@
 import {BaseStore} from '../base-store';
 import {defaultActionTypes} from './default-action-types';
-import {mainViews} from './main-views';
+import {mainViews} from '../../enums/main-views';
 import {LocalStorageKeys} from "../../utils/local-storage-keys";
 
 class DefaultStore extends BaseStore {

@@ -1,6 +1,6 @@
 class LocalStorageKeys {
     static get authToken() {
-        return 'auth-token|v4';
+        return 'auth-token|v5';
     }
 
     static get user() {
