@@ -4,17 +4,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Increment from './increment.react';
 import MainContainer from './components/main-container.react';
-import io from 'socket.io-client';
+import {setupSockets} from './utils/sockets';
 
 require('./normalize.scss');
 
-function setupSockets() {
-    const socket = io.connect(global.__apiUrl__);
-    socket.on('news', function (data) {
-        console.log(data);
-        socket.emit('my other event', { my: 'data' });
-    });
-}
+setupSockets();
 
-
-ReactDOM.render(<MainContainer />, document.getElementById('root'), setupSockets);
+ReactDOM.render(<MainContainer />, document.getElementById('root'));

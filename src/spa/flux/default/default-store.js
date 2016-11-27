@@ -3,6 +3,7 @@ import {mainViews} from "../../enums/main-views";
 import {defaultActionTypes} from "./default-action-types";
 import {LocalCache} from '../../utils/local-cache';
 import {LocalCacheKeys} from '../../utils/local-cache-keys';
+import {emitSystemEvent} from '../../utils/sockets';
 
 class DefaultStore extends BaseStore {
     constructor() {
@@ -55,6 +56,10 @@ class StateModifier {
         if (token) {
             console.log('token exists');
             console.log('user', user);
+
+            global.setTimeout(() => {
+                emitSystemEvent(`user ${user.handle} connected`);
+            }, 0);
             return mainViews.chats;
         }
         else {

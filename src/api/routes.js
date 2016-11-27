@@ -1,6 +1,7 @@
 import {redisClient, redisKeys} from './redis-client';
 import {UserValidator} from '../core/user-validator';
 import jwt from 'jsonwebtoken';
+import {io} from './sockets';
 
 const handleSecret = 'some-secret-shhh';
 
@@ -89,14 +90,33 @@ function setup(app) {
 		});
 	});
 
-	app.get('/user/verify', (req, res, next) => {
-		const bearerToken = req.header('Authorization');
-		const token = bearerToken.substring('Bearer '.length);
-
-		const decoded = jwt.verify(token, handleSecret);
-
-		res.send(decoded.handle);
+	app.get('/user/verify', verifyAuthorizationToken, (req, res, next) => {
+		res.send(req.user.handle);
 	});
+
+	app.post('/contact', verifyAuthorizationToken, (req, res, next) => {
+
+	});
+}
+
+function verifyAuthorizationToken(req, res, next) {
+
+    const bearerToken = req.header('Authorization');
+    const token = bearerToken.substring('Bearer '.length);
+
+    let decoded;
+
+    try {
+    	decoded = jwt.verify(token, handleSecret);
+	}
+	catch(err) {
+    	res.status(401).send('invalid-auth-token');
+    	return;
+	}
+
+	req.user = req.user || {};
+    req.user.handle = decoded.handle;
+    next();
 }
 
 export {setup as setupRoutes}

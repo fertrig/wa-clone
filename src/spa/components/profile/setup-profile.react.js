@@ -8,6 +8,7 @@ import {ApiUrls} from '../../utils/api-urls';
 import {LocalCache} from '../../utils/local-cache';
 import {LocalCacheKeys} from '../../utils/local-cache-keys';
 import {DefaultActions} from '../../flux/default/default-actions';
+import {emitSystemEvent} from '../../utils/sockets';
 
 class SetupProfile extends React.Component {
     constructor(props) {
@@ -71,6 +72,8 @@ class SetupProfile extends React.Component {
 
                 LocalCache.setString(LocalCacheKeys.authToken(), res.token);
                 LocalCache.setObject(LocalCacheKeys.user(), user);
+
+                emitSystemEvent(`user ${user.handle} connected`);
 
                 this.setState({
                     requestState: requestStates.success
