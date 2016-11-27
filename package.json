@@ -14,7 +14,7 @@
     "postinstall": "npm run build-api",
     "build-spa": "rm -R dist/spa & gulp build-spa",
     "spa-server": "gulp spa-server",
-    "test": "mocha './test-root.js' './src/**/__tests__/*.tests.js' --compilers js:babel-core/register"
+    "test": "mocha ./test-root.js ./src/**/__tests__/*.tests.js --compilers js:babel-core/register"
   },
   "repository": {
     "type": "git",
