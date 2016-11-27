@@ -7,6 +7,10 @@ class ApiUrls {
     static user() {
         return urlJoin(apiUrl, 'user');
     }
+
+    static contact() {
+        return urlJoin(apiUrl, 'contact');
+    }
 }
 
 export {ApiUrls}

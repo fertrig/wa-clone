@@ -5,6 +5,7 @@ import {mainViews} from '../enums/main-views';
 import {modalKeys} from '../enums/modal-keys';
 import Chats from './chat/chats.react';
 import Modal from './modal.react';
+import AddContact from './chat/add-contact.react';
 
 class MainContainer extends React.Component {
     constructor(props) {
@@ -54,7 +55,7 @@ class MainContainer extends React.Component {
     _renderModalChildren() {
         switch (this.state.modalKey) {
             case modalKeys.addContact:
-                return <h3>Add Contact Modal</h3>;
+                return <AddContact />;
 
             default:
                 return null;

@@ -1,6 +1,7 @@
 import React from 'react';
 import ProfileEditor from './profile-editor.react';
-import SubmitButton from './submit-button.react';
+import RequestSubmitButton from '../common/request-submit-button.react';
+import RequestMessage from '../common/request-message.react';
 import {requestStates} from '../../enums/request-states';
 import {StandardAjaxRequest} from '../../utils/ajax-request';
 import {ApiUrls} from '../../utils/api-urls';
@@ -26,47 +27,18 @@ class SetupProfile extends React.Component {
         require('./setup-profile.scss');
         return (
             <div className="setup-profile">
-                {this._renderContents()}
+                <ProfileEditor
+                    handle={this.state.handle}
+                    name={this.state.name}
+                    onHandleChange={this._handleHandleChange}
+                    onNameChange={this._handleNameChange}/>
+                <RequestMessage
+                    requestState={this.state.requestState}/>
+                <RequestSubmitButton
+                    requestState={this.state.requestState}
+                    onSubmit={this._submitProfile}/>
             </div>
         )
-    }
-
-    _renderContents() {
-
-        switch (this.state.requestState) {
-            case requestStates.default:
-            case requestStates.fetching:
-
-                const isFetching = this.state.requestState === requestStates.fetching;
-
-                return (
-                    <div>
-                        <ProfileEditor
-                            handle={this.state.handle}
-                            name={this.state.name}
-                            onHandleChange={this._handleHandleChange}
-                            onNameChange={this._handleNameChange}/>
-                        <SubmitButton
-                            text={isFetching ? 'Submitting...' : 'Submit' }
-                            enabled={!isFetching}
-                            onSubmit={this._submitProfile}/>
-                    </div>
-                );
-
-            case requestStates.success:
-                return (
-                    <div className="prompt">
-                        <span>Your profile has been saved. Your handle name is {this.state.handle}.</span>
-                    </div>
-                );
-
-            case requestStates.hasError:
-                return (
-                    <div className="prompt">
-                        <span>There was an error. Please reload.</span>
-                    </div>
-                );
-        }
     }
 
     _handleHandleChange(event) {
@@ -108,8 +80,8 @@ class SetupProfile extends React.Component {
                     DefaultActions.GoToChatsView();
                 }, 750);
             },
-            error: () => {
-                console.log(...arguments);
+            error: (err) => {
+                console.log(err);
                 this.setState({
                     requestState: requestStates.hasError
                 });

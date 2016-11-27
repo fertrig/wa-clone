@@ -10,20 +10,20 @@
     left: 20px;
   }
 
-  .submit {
+  .request-message {
+    position: absolute;
+    top: 500px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    color: #ffffff;
+  }
+
+  .submit-button {
     position: absolute;
     bottom: 0;
     left: 0;
-    height: 50px;
-    width: 100%;
-    background-image: linear-gradient(to left, #56da96, #47cab4);
-    border-radius: 0 0 3px 3px;
-
-    text-transform: uppercase;
-    text-align: center;
-    line-height: 50px;
-    font-size: 16px;
-    color: #ffffff;
   }
 
   .prompt {
