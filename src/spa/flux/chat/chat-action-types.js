@@ -1,7 +1,7 @@
 import keyMirror from 'key-mirror';
 
 const chatActionTypes = keyMirror({
-    showAddContactModal: null
+    processFact: null
 });
 
 export {chatActionTypes}

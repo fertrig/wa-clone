@@ -3,7 +3,7 @@ import {mainViews} from "../../enums/main-views";
 import {defaultActionTypes} from "./default-action-types";
 import {LocalCache} from '../../utils/local-cache';
 import {LocalCacheKeys} from '../../utils/local-cache-keys';
-import {emitSystemEvent} from '../../utils/sockets';
+import {connectToUserSocket} from '../../utils/sockets';
 
 class DefaultStore extends BaseStore {
     constructor() {
@@ -17,6 +17,12 @@ class ActionHandler {
 
     static handleAction(action, modifier, emitChange) {
         switch (action.type) {
+
+            case defaultActionTypes.processProfile:
+                modifier.processProfile(action.data.user, action.data.token);
+                emitChange();
+                break;
+
             case defaultActionTypes.setMainView:
                 modifier.setMainView(action.data.view);
                 emitChange();
@@ -42,30 +48,45 @@ class StateModifier {
     constructor(state) {
         this._state = state;
         this.initializeState();
+        this._checkUserSocketConnection();
     }
 
     initializeState() {
+        this._state.user = LocalCache.getObject(LocalCacheKeys.user());
         this._state.mainView = this._getInitialMainView();
         this._state.modalKey = null;
     }
 
     _getInitialMainView() {
         const token = LocalCache.getString(LocalCacheKeys.authToken());
-        const user = LocalCache.getObject(LocalCacheKeys.user());
 
         if (token) {
             console.log('token exists');
-            console.log('user', user);
-
-            global.setTimeout(() => {
-                emitSystemEvent(`user ${user.handle} connected`);
-            }, 0);
             return mainViews.chats;
         }
         else {
             console.log('token not found');
             return mainViews.setupProfile;
         }
+    }
+
+    _checkUserSocketConnection() {
+        if (this._state.user && this._state.user.handle) {
+            console.log('user', this._state.user);
+            global.setTimeout(() => {
+                connectToUserSocket(this._state.user.handle);
+            }, 0);
+        }
+    }
+
+    processProfile(user, token) {
+        LocalCache.setString(LocalCacheKeys.authToken(), token);
+        LocalCache.setObject(LocalCacheKeys.user(), user);
+
+        this._state.user = user;
+
+        connectToUserSocket(this._state.user.handle);
+        this.setMainView(mainViews.chats);
     }
 
     setMainView(view) {

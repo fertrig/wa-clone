@@ -5,10 +5,7 @@ import RequestMessage from '../common/request-message.react';
 import {requestStates} from '../../enums/request-states';
 import {StandardAjaxRequest} from '../../utils/ajax-request';
 import {ApiUrls} from '../../utils/api-urls';
-import {LocalCache} from '../../utils/local-cache';
-import {LocalCacheKeys} from '../../utils/local-cache-keys';
 import {DefaultActions} from '../../flux/default/default-actions';
-import {emitSystemEvent} from '../../utils/sockets';
 
 class SetupProfile extends React.Component {
     constructor(props) {
@@ -69,18 +66,12 @@ class SetupProfile extends React.Component {
             url: ApiUrls.user(),
             data: user,
             success: (res) => {
-
-                LocalCache.setString(LocalCacheKeys.authToken(), res.token);
-                LocalCache.setObject(LocalCacheKeys.user(), user);
-
-                emitSystemEvent(`user ${user.handle} connected`);
-
                 this.setState({
                     requestState: requestStates.success
                 });
 
                 global.setTimeout(() => {
-                    DefaultActions.goToChatsView();
+                    DefaultActions.processProfile(user, res.token);
                 }, 750);
             },
             error: (err) => {

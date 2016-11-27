@@ -7,7 +7,12 @@ import ChatList from './chat-list.react';
 class Chats extends React.Component {
     constructor(props) {
         super();
-        this.state = {
+        this.state = this._getState();
+        this._handleStoreChange = this._handleStoreChange.bind(this);
+    }
+
+    _getState() {
+        return {
             chats: chatStore.chats
         };
     }
@@ -26,7 +31,7 @@ class Chats extends React.Component {
 
     _renderContents() {
         if (this.state.chats.length > 0) {
-            return <ChatList />;
+            return <ChatList chats={this.state.chats}/>;
         }
         else {
             return (
@@ -38,6 +43,18 @@ class Chats extends React.Component {
                 </div>
             )
         }
+    }
+
+    componentDidMount() {
+        chatStore.addChangeListener(this._handleStoreChange);
+    }
+
+    componentWillUnmount() {
+        chatStore.removeChangeListener(this._handleStoreChange);
+    }
+
+    _handleStoreChange() {
+        this.setState(this._getState());
     }
 }
 

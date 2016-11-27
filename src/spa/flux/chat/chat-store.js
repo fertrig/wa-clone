@@ -1,5 +1,6 @@
 import {BaseStore} from '../base-store';
 import {chatActionTypes} from './chat-action-types';
+import {defaultStore} from '../default/default-store';
 
 class ChatStore extends BaseStore {
 
@@ -16,6 +17,11 @@ class ActionHandler {
 
         switch (action.type) {
 
+            case chatActionTypes.processFact:
+                modifier.processFact(action.data.fact);
+                emitChange();
+                break;
+
             default:
                 break;
         }
@@ -30,6 +36,21 @@ class StateModifier {
 
     initializeState() {
         this._state.chats = [];
+    }
+
+    processFact(fact) {
+        if (fact.type === 'added-as-contact') {
+            if (fact.data.sender === defaultStore.user.handle) {
+                this._state.chats.push({
+                    handle: fact.data.receiver
+                });
+            }
+            else {
+                this._state.chats.push({
+                    handle: fact.data.sender
+                });
+            }
+        }
     }
 }
 

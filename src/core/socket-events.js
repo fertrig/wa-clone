@@ -1,13 +1,8 @@
-class SocketEvents {
+import keyMirror from 'key-mirror';
 
-    static system() {
-        return `system`;
-    }
+const socketEvents = keyMirror({
+    system: null,
+    fact: null
+});
 
-    static user(handle) {
-        return `user|${handle}`;
-    }
-
-}
-
-export {SocketEvents}
+export {socketEvents}

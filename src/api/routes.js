@@ -1,7 +1,7 @@
 import {redisClient, redisKeys} from './redis-client';
 import {UserValidator} from '../core/user-validator';
 import jwt from 'jsonwebtoken';
-import {io} from './sockets';
+import {emitUserFact} from './sockets';
 
 const handleSecret = 'some-secret-shhh';
 
@@ -96,6 +96,20 @@ function setup(app) {
 
 	app.post('/contact', verifyAuthorizationToken, (req, res, next) => {
 
+		const sender = req.user.handle;
+		const receiver = req.body.handle;
+
+		const fact = {
+			type: 'added-as-contact',
+			data: {
+				sender,
+				receiver
+			}
+		};
+
+        emitUserFact(receiver, fact);
+
+        res.json(fact);
 	});
 }
 

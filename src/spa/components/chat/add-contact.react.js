@@ -4,7 +4,8 @@ import RequestMessage from '../common/request-message.react';
 import {requestStates} from '../../enums/request-states';
 import {SecureAjaxRequest} from '../../utils/ajax-request';
 import {ApiUrls} from '../../utils/api-urls';
-//import {ChatActions} from '../../flux/chat/chat-actions';
+import {ChatActions} from '../../flux/chat/chat-actions';
+import {DefaultActions} from "../../flux/default/default-actions";
 
 class AddContact extends React.Component {
     constructor(props) {
@@ -64,7 +65,8 @@ class AddContact extends React.Component {
                 });
 
                 global.setTimeout(() => {
-                    //ChatActions.ContactAdded();
+                    DefaultActions.closeModal();
+                    ChatActions.processFact(res);
                 }, 750);
             },
             error: (err) => {
