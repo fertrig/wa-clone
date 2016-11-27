@@ -25,6 +25,14 @@ class ActionHandler {
                 modifier.setModalKey(action.data.modalKey);
                 emitChange();
                 break;
+
+            case defaultActionTypes.closeModal:
+                modifier.closeModal();
+                emitChange();
+                break;
+
+            default:
+                break;
         }
     }
 }
@@ -61,6 +69,10 @@ class StateModifier {
 
     setModalKey(key) {
         this._state.modalKey = key;
+    }
+
+    closeModal() {
+        this._state.modalKey = null;
     }
 }
 

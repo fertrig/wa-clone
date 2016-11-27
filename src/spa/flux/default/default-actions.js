@@ -5,7 +5,7 @@ import {modalKeys} from "../../enums/modal-keys";
 
 class DefaultActions {
 
-    static GoToChatsView() {
+    static goToChatsView() {
         const action = {
             type: defaultActionsTypes.setMainView,
             data: {
@@ -15,12 +15,19 @@ class DefaultActions {
         dispatcher.dispatch(action);
     }
 
-    static OpenAddContactModal() {
+    static openAddContactModal() {
         const action = {
             type: defaultActionsTypes.setModalKey,
             data: {
                 modalKey: modalKeys.addContact
             }
+        };
+        dispatcher.dispatch(action);
+    }
+
+    static closeModal() {
+        const action = {
+            type: defaultActionsTypes.closeModal
         };
         dispatcher.dispatch(action);
     }

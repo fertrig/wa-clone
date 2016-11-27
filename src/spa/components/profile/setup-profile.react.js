@@ -77,7 +77,7 @@ class SetupProfile extends React.Component {
                 });
 
                 global.setTimeout(() => {
-                    DefaultActions.GoToChatsView();
+                    DefaultActions.goToChatsView();
                 }, 750);
             },
             error: (err) => {

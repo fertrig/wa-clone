@@ -5,7 +5,7 @@ function AddContactButton () {
     return (
         <div
             className="add-contact-button"
-            onClick={DefaultActions.OpenAddContactModal}>
+            onClick={DefaultActions.openAddContactModal}>
             <span>+</span>
         </div>
     )
