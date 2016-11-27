@@ -1,0 +1,69 @@
+.chats {
+
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2);
+  border: solid 0.5px rgba(65, 71, 72, 0.2);
+
+  .header {
+    height: 140px;
+    width: 100%;
+    background-color: #434748;
+    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1);
+    border-radius: 3px 3px 0 0 ;
+    position: relative;
+
+    .chat-menu-item {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 180px;
+      height: 50px;
+      border-radius: 3px;
+      background-color: #383c3d;
+
+      text-align: center;
+      color: #ffffff;
+      text-transform: uppercase;
+      line-height: 50px;
+    }
+  }
+
+  .zero-state {
+
+    position: relative;
+
+    .placeholder {
+      position: absolute;
+      top: 150px;
+      left: 0;
+      padding: 0 40px;
+      font-size: 14px;
+      line-height: 1.57;
+      text-align: center;
+      color: #777d7e;
+    }
+
+    .add-contact-button {
+      position: absolute;
+      top: 208px;
+      left: 150px;
+
+      width: 50px;
+      height: 50px;
+      border-radius: 54px;
+      background-image: linear-gradient(to left, #56da96, #47cab4);
+      box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1);
+
+      font-size: 30px;
+      font-weight: bold;
+      line-height: 50px;
+      text-align: center;
+      color: #ffffff;
+
+      cursor: pointer;
+    }
+  }
+}

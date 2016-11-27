@@ -1,9 +1,12 @@
 import React from 'react';
 import ProfileEditor from './profile-editor.react';
 import SubmitButton from './submit-button.react';
-import $ from 'jquery';
-import urlJoin from 'url-join';
-import {requestStates} from '../../core/request-states';
+import {requestStates} from '../../enums/request-states';
+import {StandardAjaxRequest} from '../../utils/ajax-request';
+import {ApiUrls} from '../../utils/api-urls';
+import {LocalCache} from '../../utils/local-cache';
+import {LocalCacheKeys} from '../../utils/local-cache-keys';
+import {DefaultActions} from '../../flux/default/default-actions';
 
 class SetupProfile extends React.Component {
     constructor(props) {
@@ -83,20 +86,27 @@ class SetupProfile extends React.Component {
             requestState: requestStates.fetching
         });
 
-        $.ajax({
-            url: urlJoin(global.__apiUrl__, 'user'),
-            dataType: 'json',
-            contentType: "application/json; charset=utf-8",
-            type: 'POST',
-            data: JSON.stringify({
-                handle: this.state.handle,
-                name: this.state.name
-            }),
+        const request = new StandardAjaxRequest();
+        const user = {
+            handle: this.state.handle,
+            name: this.state.name
+        };
+
+        request.post({
+            url: ApiUrls.user(),
+            data: user,
             success: (res) => {
-                localStorage.setItem('user-token', res.token);
+
+                LocalCache.setString(LocalCacheKeys.authToken(), res.token);
+                LocalCache.setObject(LocalCacheKeys.user(), user);
+
                 this.setState({
                     requestState: requestStates.success
                 });
+
+                global.setTimeout(() => {
+                    DefaultActions.GoToChatsView();
+                }, 750);
             },
             error: () => {
                 console.log(...arguments);
