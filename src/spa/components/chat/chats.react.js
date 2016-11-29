@@ -31,7 +31,12 @@ class Chats extends React.Component {
 
     _renderContents() {
         if (this.state.chats.length > 0) {
-            return <ChatList chats={this.state.chats}/>;
+            return (
+                <div className="chats-state">
+                    <ChatList chats={this.state.chats}/>
+                    <AddContactButton />
+                </div>
+            );
         }
         else {
             return (

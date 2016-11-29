@@ -1,8 +1,12 @@
 import React from 'react';
+import {defaultStore} from '../../flux/default/default-store';
 
 function ChatsHeader () {
     return (
         <div className="header">
+            <div className="handle">
+                <span>{defaultStore.user.handle}</span>
+            </div>
             <div className="chat-menu-item">
                 <span>Chats</span>
             </div>

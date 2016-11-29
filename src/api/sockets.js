@@ -53,7 +53,7 @@ function verifyAuthorizationToken(socket, next) {
     }
 
     if (err) {
-        console.log(err);
+        console.log(err, socket.nsp.name);
         next(err);
     }
     else {

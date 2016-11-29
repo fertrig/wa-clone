@@ -1,7 +1,7 @@
 class LocalCacheKeys {
 
     static authToken() {
-        return 'auth-token|v7';
+        return 'auth-token|v9';
     }
 
     static user() {

@@ -64,10 +64,10 @@ class AddContact extends React.Component {
                     requestState: requestStates.success
                 });
 
-                global.setTimeout(() => {
+                // global.setTimeout(() => {
                     DefaultActions.closeModal();
                     ChatActions.processFact(res);
-                }, 750);
+                // }, 0);
             },
             error: (err) => {
                 console.log(err);

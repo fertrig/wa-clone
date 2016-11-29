@@ -3,8 +3,8 @@ import React from 'react';
 function ChatList ({ chats }) {
     return (
         <div className="chat-list">
-            {chats.map((chat, index) => {
-                return <div key={index}>{chat.handle}</div>
+            {chats.map((chat) => {
+                return <div key={chat.handle} className="chat-item">{chat.handle}</div>
             })}
         </div>
     );

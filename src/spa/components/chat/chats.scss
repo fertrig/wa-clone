@@ -15,6 +15,14 @@
     border-radius: 3px 3px 0 0 ;
     position: relative;
 
+    .handle {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: #ffffff;
+      font-size: 14px;
+    }
+
     .chat-menu-item {
       position: absolute;
       left: 0;
@@ -50,20 +58,37 @@
       position: absolute;
       top: 208px;
       left: 150px;
+    }
+  }
 
-      width: 50px;
-      height: 50px;
-      border-radius: 54px;
-      background-image: linear-gradient(to left, #56da96, #47cab4);
-      box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1);
+  .chats-state {
 
-      font-size: 30px;
-      font-weight: bold;
-      line-height: 50px;
-      text-align: center;
-      color: #ffffff;
+    position: relative;
+    height: 500px;
 
-      cursor: pointer;
+    .add-contact-button {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+    }
+
+    .chat-list {
+      .chat-item {
+
+        box-sizing: border-box;
+        padding: 16px;
+
+        width: 360px;
+        height: 82px;
+        background-color: #ffffff;
+        box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
+        margin-top: 1px;
+
+        line-height: 3;
+        font-size: 16px;
+        font-weight: 600;
+        color: #424748;
+      }
     }
   }
 }
