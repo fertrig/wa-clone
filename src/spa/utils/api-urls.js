@@ -11,6 +11,10 @@ class ApiUrls {
     static contact() {
         return urlJoin(apiUrl, 'contact');
     }
+
+    static message() {
+        return urlJoin(apiUrl, 'message');
+    }
 }
 
 export {ApiUrls}

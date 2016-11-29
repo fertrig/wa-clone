@@ -22,7 +22,7 @@ function setup() {
 }
 
 const redisKeys = {
-	users: 'users|2'
+	users: 'users|5'
 };
 
 export {setup as setupRedis, client as redisClient, redisKeys}

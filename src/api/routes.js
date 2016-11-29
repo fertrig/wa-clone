@@ -111,6 +111,25 @@ function setup(app) {
 
         res.json(fact);
 	});
+
+    app.post('/message', verifyAuthorizationToken, (req, res, next) => {
+
+        const sender = req.user.handle;
+        const {receiver, content} = req.body;
+
+        const fact = {
+            type: 'message-sent',
+            data: {
+                sender,
+                receiver,
+				content
+            }
+        };
+
+        sockets.emitUserFact(receiver, fact);
+
+        res.json(fact);
+    });
 }
 
 function verifyAuthorizationToken(req, res, next) {

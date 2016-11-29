@@ -6,6 +6,7 @@ import {modalKeys} from '../enums/modal-keys';
 import Chats from './chat/chats.react';
 import Modal from './modal.react';
 import AddContact from './chat/add-contact.react';
+import Chat from './chat/chat.react';
 
 class MainContainer extends React.Component {
     constructor(props) {
@@ -17,6 +18,7 @@ class MainContainer extends React.Component {
     _getState() {
         return {
             mainView: defaultStore.mainView,
+            mainViewInitialData: defaultStore.mainViewInitialData,
             modalKey: defaultStore.modalKey
         };
     }
@@ -38,6 +40,9 @@ class MainContainer extends React.Component {
 
             case mainViews.chats:
                 return <Chats />;
+
+            case mainViews.chat:
+                return <Chat handle={this.state.mainViewInitialData.handle}/>;
 
             default:
                 throw new Error(`unexpected main view ${this.state.mainView}`);

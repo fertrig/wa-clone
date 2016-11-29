@@ -24,7 +24,7 @@ class ActionHandler {
                 break;
 
             case defaultActionTypes.setMainView:
-                modifier.setMainView(action.data.view);
+                modifier.setMainView(action.data.view, action.data.initialData);
                 emitChange();
                 break;
 
@@ -54,6 +54,7 @@ class StateModifier {
     initializeState() {
         this._state.user = LocalCache.getObject(LocalCacheKeys.user());
         this._state.mainView = this._getInitialMainView();
+        this._state.mainViewInitialData = null;
         this._state.modalKey = null;
     }
 
@@ -89,8 +90,9 @@ class StateModifier {
         this.setMainView(mainViews.chats);
     }
 
-    setMainView(view) {
+    setMainView(view, initialData) {
         this._state.mainView = view;
+        this._state.mainViewInitialData = initialData;
     }
 
     setModalKey(key) {

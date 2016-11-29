@@ -32,6 +32,19 @@ class DefaultActions {
         };
         dispatcher.dispatch(action);
     }
+
+    static showChat(handle) {
+        const action = {
+            type: defaultActionTypes.setMainView,
+            data: {
+                view: mainViews.chat,
+                initialData: {
+                    handle
+                }
+            }
+        };
+        dispatcher.dispatch(action);
+    }
 }
 
 export {DefaultActions}
