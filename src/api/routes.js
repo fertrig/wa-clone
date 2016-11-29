@@ -1,9 +1,7 @@
 import {redisClient, redisKeys} from './redis-client';
 import {UserValidator} from '../core/user-validator';
-import jwt from 'jsonwebtoken';
-import {emitUserFact} from './sockets';
-
-const handleSecret = 'some-secret-shhh';
+import {jwt} from './jwt-wrapper';
+import {sockets} from './sockets';
 
 function setup(app) {
 	app.get('/', (req, res) => {
@@ -63,10 +61,12 @@ function setup(app) {
 						}
 						else {
 
-							const token = jwt.sign({ handle }, handleSecret);
+							sockets.setupUserNamespace(user.handle);
+
+							const token = jwt.sign({ handle });
 
 							res.json({
-								token: `Bearer ${token}`
+								token: jwt.bearerToken(token)
 							});
 
 							//res.send(`User saved to redis. Number of users: ${result}.`);
@@ -107,7 +107,7 @@ function setup(app) {
 			}
 		};
 
-        emitUserFact(receiver, fact);
+        sockets.emitUserFact(receiver, fact);
 
         res.json(fact);
 	});
@@ -116,12 +116,12 @@ function setup(app) {
 function verifyAuthorizationToken(req, res, next) {
 
     const bearerToken = req.header('Authorization');
-    const token = bearerToken.substring('Bearer '.length);
+    const token = jwt.extractToken(bearerToken);
 
     let decoded;
 
     try {
-    	decoded = jwt.verify(token, handleSecret);
+    	decoded = jwt.verify(token);
 	}
 	catch(err) {
     	res.status(401).send('invalid-auth-token');
