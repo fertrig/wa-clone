@@ -13,6 +13,10 @@ class ChatStore extends BaseStore {
     getMessages(handle) {
         return this.state.messageMap.get(handle);
     }
+
+    iAmSender(handle) {
+        return this._modifier._iAmSender(handle);
+    }
 }
 
 class ActionHandler {
@@ -56,7 +60,10 @@ class StateModifier {
                     handle
                 });
 
-                this._state.messageMap.set(handle, [ "some dummy message "]);
+                this._state.messageMap.set(handle, [
+                    { sender: defaultStore.user.handle, content: "Hi, Sally"},
+                    { sender: handle, content: "Took you long enough!"}
+                ]);
 
                 break;
 
@@ -65,7 +72,7 @@ class StateModifier {
                 handle = this._getHandle(fact);
 
                 const messages = this._state.messageMap.get(handle);
-                messages.push(fact.data.content);
+                messages.push(fact.data);
 
                 break;
 
@@ -75,7 +82,7 @@ class StateModifier {
     }
 
     _getHandle(fact) {
-        if (fact.data.sender === defaultStore.user.handle) {
+        if (this._iAmSender(fact.data.sender)) {
             console.log(`I'm the sender!`);
             return fact.data.receiver;
         }
@@ -83,6 +90,10 @@ class StateModifier {
             console.log(`I'm the receiver!`);
             return fact.data.sender;
         }
+    }
+
+    _iAmSender(handle) {
+        return handle === defaultStore.user.handle;
     }
 }
 

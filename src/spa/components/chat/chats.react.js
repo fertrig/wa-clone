@@ -3,6 +3,7 @@ import {chatStore} from '../../flux/chat/chat-store';
 import ChatsHeader from './chats-header.react';
 import AddContactButton from './add-contact-button.react';
 import ChatList from './chat-list.react';
+import './chats.scss';
 
 class Chats extends React.Component {
     constructor(props) {
@@ -18,8 +19,6 @@ class Chats extends React.Component {
     }
 
     render() {
-
-        require('./chats.scss');
 
         return (
             <div className="chats">

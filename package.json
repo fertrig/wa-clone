@@ -30,6 +30,7 @@
     "babel-cli": "^6.18.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.18.0",
     "body-parser": "^1.15.2",
+    "classnames": "^2.2.5",
     "cors": "^2.8.1",
     "css-loader": "^0.25.0",
     "express": "^4.14.0",

@@ -1,0 +1,103 @@
+.chat {
+
+  width: 100%;
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2);
+  border: solid 0.5px #CCC;
+  border-radius: 3px;
+
+  .header {
+
+    height: 60px;
+    background-color: #434748;
+    position: relative;
+
+    .back {
+      position: absolute;
+      left: 12px;
+      top: 16px;
+      font-size: 26px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      text-align: center;
+      color: #ffffff;
+
+    }
+
+    .contact-initial {
+      position: absolute;
+      left: 38px;
+      top: 12px;
+      height: 36px;
+      width: 36px;
+      text-align: center;
+      line-height: 30px;
+      color: #FFF;
+      border-radius: 38.9px;
+      font-size: 26px;
+      background-image: linear-gradient(to right, #988ffa, #c585f0), linear-gradient(#464368, #464368);
+      box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-name {
+      position: absolute;
+      left: 84px;
+      top: 19px;
+
+      font-size: 16px;
+      font-weight: 600;
+      font-style: normal;
+      font-stretch: normal;
+      color: #ffffff;
+    }
+  }
+
+  .messages {
+    height: 502px;
+    background-color: #f2f0ee;
+
+    .message-container {
+
+      border-radius: 5px;
+      clear: both;
+
+      &:last-child {
+        margin-bottom: 15px;
+      }
+
+      .message {
+        position: relative;
+        display: inline-block;
+        padding: 15px;
+        margin: 15px 20px 0 20px;
+
+        &.mine {
+          background-color: #e1e1e1;
+          box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+          float: right;
+        }
+
+        &.yours {
+          background-color: #f7f7f7;
+          box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+          float: left;
+        }
+      }
+    }
+  }
+
+  .message-input-container {
+    height: 78px;
+    input {
+      box-sizing: border-box;
+      display: block;
+      height: 78px;
+      width: 100%;
+      border: 0;
+      outline: 0;
+      font-size: 14px;
+      color: #424748;
+      padding: 20px;
+    }
+  }
+}

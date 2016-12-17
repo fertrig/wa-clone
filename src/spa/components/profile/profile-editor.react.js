@@ -1,7 +1,7 @@
 import React from 'react';
+import './profile-editor.scss';
 
 function ProfileEditor ({ handle, name, onHandleChange, onNameChange }) {
-    require('./profile-editor.scss');
     return (
         <div className="profile-editor">
             <label>Handle</label>

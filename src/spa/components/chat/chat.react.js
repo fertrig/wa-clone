@@ -3,6 +3,8 @@ import {chatStore} from '../../flux/chat/chat-store';
 import {SecureAjaxRequest} from '../../utils/ajax-request';
 import {ApiUrls} from '../../utils/api-urls';
 import {ChatActions} from '../../flux/chat/chat-actions';
+import classnames from 'classnames';
+import './chat.scss';
 
 class Chat extends React.Component {
     constructor(props) {
@@ -23,19 +25,34 @@ class Chat extends React.Component {
     render() {
         return (
             <div className="chat">
+                <div className="header">
+                    <div className="back">
+                        <span>&lt;</span>
+                    </div>
+                    <div className="contact-initial">
+                        <span>{this.props.handle.substring(0,1)}</span>
+                    </div>
+                    <div className="contact-name">
+                        <span>{this.props.handle}</span>
+                    </div>
+                </div>
                 <div className="messages">
                     {this.state.messages.map((message, index) => {
+                        const mineOrYours = chatStore.iAmSender(message.sender) ? 'mine' : 'yours';
+                        const messageClasses = classnames('message', mineOrYours);
                         return (
-                            <div key={index} className="message">
-                                {message}
+                            <div key={index} className="message-container">
+                                <span className={messageClasses}>
+                                    <span>{message.content}</span>
+                                </span>
                             </div>
                         );
                     })}
                 </div>
-                <div className="textbox">
+                <div className="message-input-container">
                     <input
                         type="text"
-                        placeholder="Enter message"
+                        placeholder="Type a message"
                         value={this.state.newMessage}
                         onChange={this._handleNewMessage}
                         onKeyPress={this._handleKeyPress}/>

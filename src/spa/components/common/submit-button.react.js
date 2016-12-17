@@ -1,7 +1,7 @@
 import React from 'react';
+import './submit-button.scss';
 
 function SubmitButton ({ text, enabled, onSubmit }) {
-    require('./submit-button.scss');
     if (enabled) {
         return <div className="submit-button" onClick={onSubmit}>{text}</div>
     }

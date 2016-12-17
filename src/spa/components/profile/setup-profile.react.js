@@ -6,6 +6,7 @@ import {requestStates} from '../../enums/request-states';
 import {StandardAjaxRequest} from '../../utils/ajax-request';
 import {ApiUrls} from '../../utils/api-urls';
 import {DefaultActions} from '../../flux/default/default-actions';
+import './setup-profile.scss';
 
 class SetupProfile extends React.Component {
     constructor(props) {
@@ -22,7 +23,6 @@ class SetupProfile extends React.Component {
 
     render() {
 
-        require('./setup-profile.scss');
         return (
             <div className="setup-profile">
                 <ProfileEditor

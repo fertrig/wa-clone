@@ -6,6 +6,7 @@ import {SecureAjaxRequest} from '../../utils/ajax-request';
 import {ApiUrls} from '../../utils/api-urls';
 import {ChatActions} from '../../flux/chat/chat-actions';
 import {DefaultActions} from "../../flux/default/default-actions";
+import './add-contact.scss';
 
 class AddContact extends React.Component {
     constructor(props) {
@@ -19,8 +20,6 @@ class AddContact extends React.Component {
     }
 
     render() {
-
-        require('./add-contact.scss');
         return (
             <div className="add-contact">
                 <div className="header">
