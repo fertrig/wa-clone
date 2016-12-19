@@ -22,7 +22,7 @@ function setup() {
 }
 
 const redisKeys = {
-	users: 'users|5'
+	users: process.env.ENV_NAME === 'demo' ? 'demo|users|1' : 'users|5'
 };
 
 export {setup as setupRedis, client as redisClient, redisKeys}
