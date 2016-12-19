@@ -5,7 +5,7 @@ function ChatsHeader () {
     return (
         <div className="header">
             <div className="handle">
-                <span>{defaultStore.user.handle}</span>
+                <span>my handle: {defaultStore.user.handle}</span>
             </div>
             <div className="chat-menu-item">
                 <span>Chats</span>

@@ -14,14 +14,14 @@
     .back {
       position: absolute;
       left: 12px;
-      top: 16px;
+      top: 14px;
       font-size: 26px;
       font-weight: bold;
       font-style: normal;
       font-stretch: normal;
       text-align: center;
       color: #ffffff;
-
+      cursor: pointer;
     }
 
     .contact-initial {
@@ -31,12 +31,13 @@
       height: 36px;
       width: 36px;
       text-align: center;
-      line-height: 30px;
+      line-height: 33px;
       color: #FFF;
       border-radius: 38.9px;
-      font-size: 26px;
+      font-size: 22px;
       background-image: linear-gradient(to right, #988ffa, #c585f0), linear-gradient(#464368, #464368);
       box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1);
+      text-transform: uppercase;
     }
 
     .contact-name {
@@ -60,6 +61,9 @@
 
       border-radius: 5px;
       clear: both;
+      content: '';
+      display: table;
+      width: 100%;
 
       &:last-child {
         margin-bottom: 15px;
@@ -67,7 +71,7 @@
 
       .message {
         position: relative;
-        display: inline-block;
+        //display: inline-block;
         padding: 15px;
         margin: 15px 20px 0 20px;
 

@@ -45,6 +45,16 @@ class DefaultActions {
         };
         dispatcher.dispatch(action);
     }
+
+    static showChats() {
+        const action = {
+            type: defaultActionTypes.setMainView,
+            data: {
+                view: mainViews.chats
+            }
+        };
+        dispatcher.dispatch(action);
+    }
 }
 
 export {DefaultActions}

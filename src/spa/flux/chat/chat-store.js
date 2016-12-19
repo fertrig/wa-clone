@@ -60,10 +60,12 @@ class StateModifier {
                     handle
                 });
 
-                this._state.messageMap.set(handle, [
-                    { sender: defaultStore.user.handle, content: "Hi, Sally"},
-                    { sender: handle, content: "Took you long enough!"}
-                ]);
+                // this._state.messageMap.set(handle, [
+                //     { sender: defaultStore.user.handle, content: "Hi, Sally"},
+                //     { sender: handle, content: "Took you long enough!"}
+                // ]);
+
+                this._state.messageMap.set(handle, []);
 
                 break;
 

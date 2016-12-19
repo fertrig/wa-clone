@@ -3,6 +3,7 @@ import {chatStore} from '../../flux/chat/chat-store';
 import {SecureAjaxRequest} from '../../utils/ajax-request';
 import {ApiUrls} from '../../utils/api-urls';
 import {ChatActions} from '../../flux/chat/chat-actions';
+import {DefaultActions} from '../../flux/default/default-actions';
 import classnames from 'classnames';
 import './chat.scss';
 
@@ -13,6 +14,7 @@ class Chat extends React.Component {
         this._handleStoreChange = this._handleStoreChange.bind(this);
         this._handleNewMessage = this._handleNewMessage.bind(this);
         this._handleKeyPress = this._handleKeyPress.bind(this);
+        this._goBack = this._goBack.bind(this);
     }
 
     _getState(props) {
@@ -26,7 +28,7 @@ class Chat extends React.Component {
         return (
             <div className="chat">
                 <div className="header">
-                    <div className="back">
+                    <div className="back" onClick={this._goBack}>
                         <span>&lt;</span>
                     </div>
                     <div className="contact-initial">
@@ -42,9 +44,9 @@ class Chat extends React.Component {
                         const messageClasses = classnames('message', mineOrYours);
                         return (
                             <div key={index} className="message-container">
-                                <span className={messageClasses}>
+                                <div className={messageClasses}>
                                     <span>{message.content}</span>
-                                </span>
+                                </div>
                             </div>
                         );
                     })}
@@ -88,6 +90,10 @@ class Chat extends React.Component {
                 }
             })
         }
+    }
+
+    _goBack() {
+        DefaultActions.showChats();
     }
 
     componentDidMount() {
