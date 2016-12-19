@@ -8,11 +8,11 @@
     "npm": "3.10.8"
   },
   "scripts": {
-    "build-api": "rm -R dist/api && rm -R dist/core && babel src/api -d dist/api && babel src/core -d dist/core",
+    "build-api": "rm -Rf dist/api && rm -Rf dist/core && babel src/api -d dist/api && babel src/core -d dist/core",
     "babel-node": "babel-node",
     "nodemon": "nodemon --exec npm run babel-node",
     "postinstall": "npm run build-api",
-    "build-spa": "rm -R dist/spa & gulp build-spa",
+    "build-spa": "rm -Rf dist/spa & gulp build-spa",
     "spa-server": "gulp spa-server",
     "test": "mocha ./test-root.js ./src/**/__tests__/*.tests.js --compilers js:babel-core/register"
   },
