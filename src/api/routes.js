@@ -32,8 +32,53 @@ function setup(app) {
 		})
 	});
 
+    app.post('/contact', (req, res, next) => {
+		console.log('POST /contact', req.body);
+
+        const bearerToken = req.header('Authorization');
+        const token = bearerToken.substring('Bearer '.length);
+
+        const decoded = jwt.verify(token, handleSecret);
+
+		redisClient.lrange(redisKeys.users, 0, -1, (err, result) => {
+			if (err) {
+				next(err);
+			}
+			else {
+				const handles = result.map(JSON.parse).map(x => x.handle);
+				const found = handles.some(x => x === decoded.handle);
+
+				if (found) {
+                    // validate:
+                    // 1. handle exists
+                    // 2. handle is not the same as user's handle
+                    // 3. handle is not already part of the user's contacts
+
+					redisClient.lpush(redisKeys.contactsByUser(decoded.handle), req.body.handle, (err, _result) => {
+						if (err) {
+							next(err);
+						}
+						else {
+							redisClient.lrange(redisKeys.contactsByUser(decoded.handle), 0, -1, (err, result) => {
+								if (err) {
+									next(err);
+								}
+								else {
+                                    res.json(result);
+								}
+							});
+						}
+					});
+				}
+				else {
+					res.status(401).send('unauthorized');
+				}
+			}
+		});
+    });
+
 	app.post('/user', (req, res, next) => {
-		console.log('user', req.body);
+		console.log('POST /user', req.body);
 
 		const {handle, name} = req.body;
 

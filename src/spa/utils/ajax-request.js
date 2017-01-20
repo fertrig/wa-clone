@@ -23,17 +23,19 @@ class AjaxRequest {
     }
 
     _requestPost(url, requestData, success, error) {
-        $.ajax({
-            url,
-            method: 'POST',
-            beforeSend: this._setHeaders,
-            dataType: 'json',
-            contentType: 'application/json',
-            jsonp: false,
-            data: JSON.stringify(requestData),
-            success,
-            error
-        });
+        global.setTimeout(() => {
+            $.ajax({
+                url,
+                method: 'POST',
+                beforeSend: this._setHeaders,
+                dataType: 'json',
+                contentType: 'application/json',
+                jsonp: false,
+                data: JSON.stringify(requestData),
+                success,
+                error
+            });
+        }, 500);
     }
 
     _setHeaders(request) {
@@ -53,7 +55,7 @@ class SecureAjaxRequest extends StandardAjaxRequest {
         super._setHeaders(request);
         const authToken = LocalCache.getString(LocalCacheKeys.authToken());
         if (authToken) {
-            request.setRequestHeader('Authorization', `Bearer ${authToken}`);
+            request.setRequestHeader('Authorization', authToken);
         }
         else {
             throw new Error('auth token missing');
