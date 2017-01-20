@@ -83,28 +83,30 @@ class SetupProfile extends React.Component {
             requestState: requestStates.fetching
         });
 
-        $.ajax({
-            url: urlJoin(global.__apiUrl__, 'user'),
-            dataType: 'json',
-            contentType: "application/json; charset=utf-8",
-            type: 'POST',
-            data: JSON.stringify({
-                handle: this.state.handle,
-                name: this.state.name
-            }),
-            success: (res) => {
-                localStorage.setItem('user-token', res.token);
-                this.setState({
-                    requestState: requestStates.success
-                });
-            },
-            error: () => {
-                console.log(...arguments);
-                this.setState({
-                    requestState: requestStates.hasError
-                });
-            }
-        });
+        global.setTimeout(() => {
+            $.ajax({
+                url: urlJoin(global.__apiUrl__, 'user'),
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                type: 'POST',
+                data: JSON.stringify({
+                    handle: this.state.handle,
+                    name: this.state.name
+                }),
+                success: (res) => {
+                    localStorage.setItem('user-token', res.token);
+                    this.setState({
+                        requestState: requestStates.success
+                    });
+                },
+                error: () => {
+                    console.log(...arguments);
+                    this.setState({
+                        requestState: requestStates.hasError
+                    });
+                }
+            });
+        }, 1000);
     }
 }
 
