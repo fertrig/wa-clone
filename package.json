@@ -8,7 +8,7 @@
     "npm": "3.10.8"
   },
   "scripts": {
-    "build-api": "rm -R dist/api && rm -R dist/core && babel src/api -d dist/api && babel src/core -d dist/core",
+    "build-api": "rm -Rf dist/api && rm -Rf dist/core && babel src/api -d dist/api && babel src/core -d dist/core",
     "babel-node": "babel-node",
     "nodemon": "nodemon --exec npm run babel-node",
     "postinstall": "npm run build-api",
@@ -33,6 +33,7 @@
     "cors": "^2.8.1",
     "css-loader": "^0.25.0",
     "express": "^4.14.0",
+    "flux": "^3.1.2",
     "jsonwebtoken": "^7.1.9",
     "key-mirror": "^1.0.1",
     "node-sass": "^3.11.3",
