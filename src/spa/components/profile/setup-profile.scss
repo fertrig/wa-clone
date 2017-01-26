@@ -4,6 +4,16 @@
   width: 100%;
   height: 100%;
 
+  .logo {
+    position: absolute;
+    top: 100px;
+    left: 93px;
+
+    img {
+      width: 174px;
+    }
+  }
+
   .profile-editor {
     position: absolute;
     top: 217px;

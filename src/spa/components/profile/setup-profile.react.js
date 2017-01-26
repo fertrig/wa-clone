@@ -25,6 +25,9 @@ class SetupProfile extends React.Component {
 
         return (
             <div className="setup-profile">
+                <div className="logo">
+                    <img src="logo2x.png" />
+                </div>
                 <ProfileEditor
                     handle={this.state.handle}
                     name={this.state.name}
