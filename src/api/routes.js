@@ -148,7 +148,8 @@ function setup(app) {
             data: {
                 sender,
                 receiver,
-				content
+				content,
+				messageId: Date.now()
             }
         };
 
@@ -156,6 +157,27 @@ function setup(app) {
 
         res.json(fact);
     });
+
+    app.post('/acknowledge', verifyAuthorizationToken, (req, res, next) => {
+
+        console.log('POST /acknowledge', req.body);
+
+    	const sender = req.user.handle;
+    	const {receiver, messageId} = req.body;
+
+    	const fact = {
+    		type: 'ack-sent',
+			data: {
+    			sender,
+				receiver,
+				messageId
+			}
+		};
+
+    	sockets.emitUserFact(receiver, fact);
+
+    	res.json(fact);
+	});
 }
 
 function verifyAuthorizationToken(req, res, next) {

@@ -7,6 +7,10 @@ class LocalCacheKeys {
     static user() {
         return 'user|v2';
     }
+
+    static facts() {
+        return 'facts|v0';
+    }
 }
 
 export {LocalCacheKeys}

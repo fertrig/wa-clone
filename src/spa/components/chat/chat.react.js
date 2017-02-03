@@ -42,10 +42,22 @@ class Chat extends React.Component {
                     {this.state.messages.map((message, index) => {
                         const mineOrYours = chatStore.iAmSender(message.sender) ? 'mine' : 'yours';
                         const messageClasses = classnames('message', mineOrYours);
+                        let checkmarks = '';
+
+                        if (chatStore.iAmSender(message.sender)) {
+                            if (message.receivedByServer) {
+                                checkmarks += '+';
+                            }
+
+                            if (message.acknowledged) {
+                                checkmarks += '+';
+                            }
+                        }
+                        
                         return (
                             <div key={index} className="message-container">
                                 <div className={messageClasses}>
-                                    <span>{message.content}</span>
+                                    <span>{message.content}</span><span>{checkmarks}</span>
                                 </div>
                             </div>
                         );

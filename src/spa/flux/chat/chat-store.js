@@ -1,6 +1,10 @@
 import {BaseStore} from '../base-store';
 import {chatActionTypes} from './chat-action-types';
 import {defaultStore} from '../default/default-store';
+import {LocalCache} from '../../utils/local-cache';
+import {LocalCacheKeys} from '../../utils/local-cache-keys';
+import {SecureAjaxRequest} from '../../utils/ajax-request';
+import {ApiUrls} from '../../utils/api-urls';
 
 class ChatStore extends BaseStore {
 
@@ -27,6 +31,8 @@ class ActionHandler {
 
             case chatActionTypes.processFact:
                 modifier.processFact(action.data.fact);
+                modifier.postProcessFact(action.data.fact);
+                modifier.saveFact(action.data.fact);
                 emitChange();
                 break;
 
@@ -45,11 +51,36 @@ class StateModifier {
     initializeState() {
         this._state.chats = [];
         this._state.messageMap = new Map();
+        this.replayFacts();
+    }
+
+    saveFact(fact) {
+        const facts = this._getLocalFacts();
+
+        facts.push(fact);
+
+        LocalCache.setObject(LocalCacheKeys.facts(), facts);
+    }
+
+    _getLocalFacts() {
+        return LocalCache.getObject(LocalCacheKeys.facts()) || [];
+    }
+
+    replayFacts() {
+        const facts = this._getLocalFacts();
+
+        console.log('facts', facts);
+
+        for (let fact of facts) {
+            this.processFact(fact);
+        }
     }
 
     processFact(fact) {
 
         let handle = null;
+        let messages = null;
+        let message = null;
 
         switch (fact.type) {
             case 'added-as-contact':
@@ -73,14 +104,64 @@ class StateModifier {
 
                 handle = this._getHandle(fact);
 
-                const messages = this._state.messageMap.get(handle);
-                messages.push(fact.data);
+                messages = this._state.messageMap.get(handle);
+                message = fact.data;
+                message.receivedByServer = true;
+                messages.push(message);
+
+                break;
+
+            case 'ack-sent':
+
+                handle = fact.data.sender;
+
+                messages = this._state.messageMap.get(handle);
+
+                message = messages.find((msg) => msg.messageId === fact.data.messageId);
+
+                if (message) {
+                    message.acknowledged = true;
+                }
 
                 break;
 
             default:
                 throw new Error(`unexpected fact type ${fact.type}`);
         }
+    }
+
+    postProcessFact(fact) {
+
+        switch (fact.type) {
+            case 'message-sent':
+                if (!this._iAmSender(fact.data.sender)) {
+                    this._submitAck(fact.data);
+                }
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    _submitAck(message) {
+        const request = new SecureAjaxRequest();
+
+        const data = {
+            receiver: message.sender,
+            messageId: message.messageId
+        };
+
+        request.post({
+            url: ApiUrls.acknowledge(),
+            data,
+            success: (res) => {
+                console.log(res);
+            },
+            error: (err) => {
+                console.log(err);
+            }
+        });
     }
 
     _getHandle(fact) {

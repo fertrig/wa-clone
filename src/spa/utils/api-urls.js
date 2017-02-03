@@ -15,6 +15,10 @@ class ApiUrls {
     static message() {
         return urlJoin(apiUrl, 'message');
     }
+
+    static acknowledge() {
+        return urlJoin(apiUrl, 'acknowledge');
+    }
 }
 
 export {ApiUrls}
