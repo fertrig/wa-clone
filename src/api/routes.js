@@ -32,7 +32,7 @@ function setup(app) {
 	});
 
 	app.post('/user', (req, res, next) => {
-		console.log('user', req.body);
+        console.log('POST /user', req.body);
 
 		const {handle, name} = req.body;
 
@@ -94,22 +94,48 @@ function setup(app) {
 		res.send(req.user.handle);
 	});
 
-	app.post('/contact', verifyAuthorizationToken, (req, res, next) => {
+    app.post('/contact', verifyAuthorizationToken, (req, res, next) => {
+        console.log('POST /contact', req.body);
 
-		const sender = req.user.handle;
-		const receiver = req.body.handle;
+        const sender = req.user.handle;
+        const receiver = req.body.handle;
 
-		const fact = {
-			type: 'added-as-contact',
-			data: {
-				sender,
-				receiver
+		// @TODO: validate:
+		// 1. receiver handle exists
+		// 2. handle is not the same as user's handle
+		// 3. handle is not already part of the user's contacts
+
+		redisClient.lpush(redisKeys.contactsByUser(sender), receiver, (err, result) => {
+			if (err) {
+				next(err);
 			}
-		};
+			else {
+                const fact = {
+                    type: 'added-as-contact',
+                    data: {
+                        sender,
+                        receiver
+                    }
+                };
 
-        sockets.emitUserFact(receiver, fact);
+                sockets.emitUserFact(receiver, fact);
 
-        res.json(fact);
+                res.json(fact);
+			}
+		});
+    });
+
+    app.get('/contact', verifyAuthorizationToken, (req, res, next) => {
+        const sender = req.user.handle;
+
+        redisClient.lrange(redisKeys.contactsByUser(sender), 0, -1, (err, result) => {
+            if (err) {
+                next(err);
+            }
+            else {
+                res.json(result);
+            }
+        });
 	});
 
     app.post('/message', verifyAuthorizationToken, (req, res, next) => {
