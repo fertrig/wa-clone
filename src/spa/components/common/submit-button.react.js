@@ -6,7 +6,7 @@ function SubmitButton ({ text, enabled, onSubmit }) {
         return <div className="submit-button" onClick={onSubmit}>{text}</div>
     }
     else {
-        return <div className="submit-button" onClick={onSubmit} disabled>{text}</div>
+        return <div className="submit-button">{text}</div>
     }
 }
 

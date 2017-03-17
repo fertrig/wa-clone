@@ -6,6 +6,7 @@ import {modalKeys} from '../enums/modal-keys';
 import Chats from './chat/chats.react';
 import Modal from './modal.react';
 import AddContact from './chat/add-contact.react';
+import './main.scss';
 
 class MainContainer extends React.Component {
     constructor(props) {
@@ -22,7 +23,6 @@ class MainContainer extends React.Component {
     }
 
     render() {
-        require('./main.scss');
         return (
             <div className="main-container">
                 {this._renderMainView()}
