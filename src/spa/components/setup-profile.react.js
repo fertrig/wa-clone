@@ -106,7 +106,7 @@ class SetupProfile extends React.Component {
                     });
                 }
             });
-        }, 1000);
+        }, 3000);
     }
 }
 

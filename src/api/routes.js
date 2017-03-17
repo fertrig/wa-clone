@@ -68,7 +68,7 @@ function setup(app) {
 								token: `Bearer ${token}`
 							});
 
-							//res.send(`User saved to redis. Number of users: ${result}.`);
+							// res.send(`User saved to redis. Number of users: ${result}.`);
 						}
 					});
 				}

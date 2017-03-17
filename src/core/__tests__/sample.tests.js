@@ -1,6 +1,6 @@
 describe('Sample Test', () => {
 
     it('pass', () => {
-    	assert.equal(1, 1);
+    	assert.equal(1, 2);
     });
 });

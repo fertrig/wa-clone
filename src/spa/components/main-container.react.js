@@ -1,5 +1,6 @@
 import React from 'react';
 import SetupProfile from './setup-profile.react';
+import './main.scss';
 
 class MainContainer extends React.Component {
     constructor(props) {
@@ -8,7 +9,6 @@ class MainContainer extends React.Component {
     }
 
     render() {
-        require('./main.scss');
         return (
             <div className="main-container">
                 <SetupProfile/>
