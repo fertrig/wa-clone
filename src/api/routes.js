@@ -140,18 +140,10 @@ function setup(app) {
 
     app.post('/message', verifyAuthorizationToken, (req, res, next) => {
 
-        const sender = req.user.handle;
-        const {receiver, content} = req.body;
+        console.log('POST /message', req.body);
 
-        const fact = {
-            type: 'message-sent',
-            data: {
-                sender,
-                receiver,
-				content,
-				messageId: Date.now()
-            }
-        };
+        const fact = req.body;
+        const { receiver } = fact.data;
 
         sockets.emitUserFact(receiver, fact);
 

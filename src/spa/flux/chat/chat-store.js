@@ -106,8 +106,23 @@ class StateModifier {
 
                 messages = this._state.messageMap.get(handle);
                 message = fact.data;
-                message.receivedByServer = true;
+                message.receivedByServer = false;
+                message.acknowledged = false;
                 messages.push(message);
+
+                break;
+
+            case 'message-received-by-server':
+
+                handle = fact.data.receiver;
+
+                messages = this._state.messageMap.get(handle);
+
+                message = messages.find((msg) => msg.messageId === fact.data.messageId);
+
+                if (message) {
+                    message.receivedByServer = true;
+                }
 
                 break;
 
@@ -130,6 +145,9 @@ class StateModifier {
         }
     }
 
+    // This function is used for processing that should only happen when
+    // facts are first received in real-time. It is the type of processing
+    // that should not run when the application loads.
     postProcessFact(fact) {
 
         switch (fact.type) {
@@ -152,16 +170,18 @@ class StateModifier {
             messageId: message.messageId
         };
 
-        request.post({
-            url: ApiUrls.acknowledge(),
-            data,
-            success: (res) => {
-                console.log(res);
-            },
-            error: (err) => {
-                console.log(err);
-            }
-        });
+        global.setTimeout(() => {
+            request.post({
+                url: ApiUrls.acknowledge(),
+                data,
+                success: (res) => {
+                    console.log(res);
+                },
+                error: (err) => {
+                    console.log(err);
+                }
+            });
+        }, 3000);
     }
 
     _getHandle(fact) {

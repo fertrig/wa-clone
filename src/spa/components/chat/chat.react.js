@@ -1,5 +1,6 @@
 import React from 'react';
 import {chatStore} from '../../flux/chat/chat-store';
+import {defaultStore} from '../../flux/default/default-store';
 import {SecureAjaxRequest} from '../../utils/ajax-request';
 import {ApiUrls} from '../../utils/api-urls';
 import {ChatActions} from '../../flux/chat/chat-actions';
@@ -85,22 +86,41 @@ class Chat extends React.Component {
         if (event.key === 'Enter') {
             const request = new SecureAjaxRequest();
 
-            const message = {
-                receiver: this.props.handle,
-                content: this.state.newMessage
+            const receiver = this.props.handle;
+
+
+            const fact = {
+                type: 'message-sent',
+                data: {
+                    sender: defaultStore.user.handle,
+                    receiver,
+                    content: this.state.newMessage,
+                    messageId: Date.now()
+                }
             };
 
-            request.post({
-                url: ApiUrls.message(),
-                data: message,
-                success: (res) => {
-                    console.log(res);
-                    ChatActions.processFact(res);
-                },
-                error: (err) => {
-                    console.log(err);
-                }
-            })
+            ChatActions.processFact(fact);
+
+            global.setTimeout(() => {
+                request.post({
+                    url: ApiUrls.message(),
+                    data: fact,
+                    success: (res) => {
+                        console.log(res);
+                        const receivedByServerFact = {
+                            type: 'message-received-by-server',
+                            data: {
+                                receiver,
+                                messageId: fact.data.messageId
+                            }
+                        };
+                        ChatActions.processFact(receivedByServerFact);
+                    },
+                    error: (err) => {
+                        console.log(err);
+                    }
+                })
+            }, 3000);
         }
     }
 
