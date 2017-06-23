@@ -7,7 +7,8 @@ class LocalCache {
     static setString(key, value) {
         try {
             localStorage.setItem(key, value);
-            console.log(`${key} set to localStorage with value ${value}`);
+            // console.log(`${key} set to localStorage with value ${value}`);
+            console.log(`${key} set to localStorage`);
         }
         catch(err) {
             console.error(err, 'localStorage may seem full, please clean up some keys');

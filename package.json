@@ -43,7 +43,10 @@
     "socket.io": "^1.7.0",
     "style-loader": "^0.13.1",
     "url-join": "^1.1.0",
-    "validator": "^6.1.0"
+    "validator": "^6.1.0",
+    "file-loader": "0.8.4",
+    "imagemin": "3.2.1",
+    "image-webpack-loader": "1.6.1"
   },
   "devDependencies": {
     "babel-loader": "^6.2.7",

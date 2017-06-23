@@ -8,10 +8,14 @@ import {DefaultActions} from '../../flux/default/default-actions';
 import classnames from 'classnames';
 import './chat.scss';
 
+import checkOnce from './icon-check-once-3x.png';
+import checkTwice from './icon-check-twice-3x.png';
+
 class Chat extends React.Component {
     constructor(props) {
         super();
         this.state = this._getState(props);
+        this.state.newMessage = '';
         this._handleStoreChange = this._handleStoreChange.bind(this);
         this._handleNewMessage = this._handleNewMessage.bind(this);
         this._handleKeyPress = this._handleKeyPress.bind(this);
@@ -19,13 +23,20 @@ class Chat extends React.Component {
     }
 
     _getState(props) {
+
+        const messages = chatStore.getMessages(props.handle);
+
         return {
-            messages: chatStore.getMessages(props.handle),
-            newMessage: ''
+            messages,
+            messagesCount: messages.length
         };
     }
 
     render() {
+
+        console.log(checkOnce);
+        console.log(checkTwice);
+
         return (
             <div className="chat">
                 <div className="header">
@@ -39,26 +50,26 @@ class Chat extends React.Component {
                         <span>{this.props.handle}</span>
                     </div>
                 </div>
-                <div className="messages">
+                <div className="messages" ref="messages">
                     {this.state.messages.map((message, index) => {
                         const mineOrYours = chatStore.iAmSender(message.sender) ? 'mine' : 'yours';
                         const messageClasses = classnames('message', mineOrYours);
-                        let checkmarks = '';
+                        let checkUrl = '';
 
                         if (chatStore.iAmSender(message.sender)) {
                             if (message.receivedByServer) {
-                                checkmarks += '+';
+                                checkUrl = checkOnce;
                             }
 
                             if (message.acknowledged) {
-                                checkmarks += '+';
+                                checkUrl = checkTwice;
                             }
                         }
                         
                         return (
                             <div key={index} className="message-container">
                                 <div className={messageClasses}>
-                                    <span>{message.content}</span><span>{checkmarks}</span>
+                                    <span>{message.content}</span>&nbsp;{ checkUrl ? <img height="10" src={checkUrl}/> : null }
                                 </div>
                             </div>
                         );
@@ -101,6 +112,10 @@ class Chat extends React.Component {
 
             ChatActions.processFact(fact);
 
+            this.setState({
+                newMessage: ''
+            });
+
             global.setTimeout(() => {
                 request.post({
                     url: ApiUrls.message(),
@@ -130,6 +145,15 @@ class Chat extends React.Component {
 
     componentDidMount() {
         chatStore.addChangeListener(this._handleStoreChange);
+
+        this.refs.messages.scrollTop = this.refs.messages.scrollHeight;
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+
+        if (prevState.messagesCount < this.state.messagesCount) {
+            this.refs.messages.scrollTop = this.refs.messages.scrollHeight;
+        }
     }
 
     componentWillUnmount() {

@@ -38,6 +38,8 @@ function verifyAuthorizationToken(socket, next) {
     let err;
     const bearerToken = socket.handshake.query.token;
 
+    console.log('bearer token', bearerToken);
+
     if (bearerToken) {
         const token = jwt.extractToken(bearerToken);
 

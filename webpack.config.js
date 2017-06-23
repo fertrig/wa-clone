@@ -28,7 +28,13 @@ module.exports = {
 			{
 				test: /src(\/|\\).*\.scss$/,
 				loaders: ["style", "css", "sass"]
-			}
+			},
+            {
+                test: /src(\/|\\).*\.(jpe?g|png|gif|svg)$/i,
+                loaders: [
+                    'file?name=img-[name]-[hash:6].[ext]'
+                ]
+            }
 		]
 	},
 	plugins: []
